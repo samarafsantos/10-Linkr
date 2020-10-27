@@ -1,5 +1,5 @@
 {
-  "name": "desafio-la-demorado",
+  "name": "Linkr",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -17,10 +17,13 @@
     "babel-loader": "^8.1.0",
     "react": "^16.14.0",
     "react-dom": "^16.14.0",
+    "react-hashtag": "^2.1.2",
+    "react-icons": "^3.11.0",
     "react-router-dom": "^5.2.0",
     "styled-components": "^5.2.0",
     "webpack": "^5.1.2",
     "webpack-cli": "^4.0.0",
-    "webpack-dev-server": "^3.11.0"
+    "webpack-dev-server": "^3.11.0",
+    "preact": "8.2.5"
   }
 }

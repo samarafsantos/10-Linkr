@@ -6,17 +6,15 @@ import UserContext from '../contexts/UserContext';
 
 
 export default function Login() {
+    const history = useHistory();
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [clicked, setClicked] = useState(false);
     const { userInfo, setUserInfo } = useContext(UserContext);
 
-    const history = useHistory();
     function sendRequest(event) {
         event.preventDefault();
-
         if(clicked) return;
-
         if(email === '' || password === '') {
             alert('Por favor, preencha todos os campos');
             return;
@@ -29,7 +27,7 @@ export default function Login() {
         request.then(response => {
             const data = response.data;
             setUserInfo({ ...userInfo, data });
-            history.push('/Timeline');
+            history.push("/Timeline")
         });
 
         request.catch(() => alert('E-mail ou senha incorretos'));

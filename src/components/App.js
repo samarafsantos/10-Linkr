@@ -13,9 +13,9 @@ export default function App() {
         <UserContext.Provider value={{ userInfo, setUserInfo }}>
             <Router>
                 <Switch>
-                    <Route path="/Signup" component={SignUp} />
-                    <Route path="/Timeline" component={Timeline} />
-                    <Route path="/" component={Login} />
+                    <Route path="/Timeline" component={Timeline} exact />
+                    <Route path="/Signup" component={SignUp} exact />
+                    <Route path="/" component={Login} exact />
                 </Switch>
             </Router>
         </UserContext.Provider>

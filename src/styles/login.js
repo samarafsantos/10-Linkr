@@ -44,6 +44,10 @@ export const LoginInfo = styled.form`
     }
     a {
         text-decoration: underline;
+<<<<<<< HEAD
+=======
+        color: black;
+>>>>>>> b01d89b9edc835a0198da3ae46d75685efda817c
         font-size: 14px;
         display: block;
     }

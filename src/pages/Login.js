@@ -1,6 +1,6 @@
 import React, { useState, useContext } from 'react';
 import axios from 'axios';
-import { Link, useHistory } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { Container, LoginTitle, LoginInfo } from '../styles/login';
 import UserContext from '../contexts/UserContext';
 
@@ -11,7 +11,6 @@ export default function Login() {
     const [clicked, setClicked] = useState(false);
     const { userInfo, setUserInfo } = useContext(UserContext);
 
-    const history = useHistory();
     function sendRequest(event) {
         event.preventDefault();
 
@@ -29,7 +28,6 @@ export default function Login() {
         request.then(response => {
             const data = response.data;
             setUserInfo({ ...userInfo, data });
-            history.push('/Timeline');
         });
 
         request.catch(() => alert('E-mail ou senha incorretos'));
@@ -54,7 +52,7 @@ export default function Login() {
                     value={password} 
                     placeholder='password'
                 />
-                <button type='submit'>Log In</button>
+                <Link to='/Timeline'><button type='submit'>Log In</button></Link>
                 <Link to='/SignUp'>First time? Create an account!</Link>
             </LoginInfo>
         </Container>

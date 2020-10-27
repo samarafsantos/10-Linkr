@@ -43,7 +43,7 @@ export const LoginInfo = styled.form`
     }
     a {
         text-decoration: underline;
-        color: #FFF;
+        color: black;
         font-size: 14px;
         display: block;
     }

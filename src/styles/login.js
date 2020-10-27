@@ -26,6 +26,7 @@ export const LoginInfo = styled.form`
     height: 100vh;
     padding: 32vh 5%;
     text-align: center;
+    background: #333333;
     input, button {
         width: 90%;
         border: none;
@@ -43,7 +44,6 @@ export const LoginInfo = styled.form`
     }
     a {
         text-decoration: underline;
-        color: #FFF;
         font-size: 14px;
         display: block;
     }

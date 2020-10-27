@@ -14,8 +14,8 @@ export default function App() {
             <Router>
                 <Switch>
                     <Route path="/Signup" component={SignUp} />
-                    <Route path="/" component={Login} />
                     <Route path="/Timeline" component={Timeline} />
+                    <Route path="/" component={Login} />
                 </Switch>
             </Router>
         </UserContext.Provider>

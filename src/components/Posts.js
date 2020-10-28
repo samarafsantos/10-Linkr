@@ -6,7 +6,6 @@ import { Snippet, PostSection } from '../styles/timeline';
 
 export default function Post(props) {
     const {post} = props;
-    console.log(post);
     return (
         <PostSection>
             <img src={post.user.avatar}/>

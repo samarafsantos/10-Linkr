@@ -4,14 +4,18 @@ import Header from '../components/Header';
 import InputPost from '../components/InputPost';
 import Post from "../components/Posts";
 
-import { MainContainer, Container, Title } from '../styles/timeline';
+import { Container, Title } from '../styles/timeline';
 
 import UserContext from '../contexts/UserContext';
 
 export default function Timeline() {
     const [posts, setPosts] = useState([]);
-    const { userInfo } = useContext(UserContext);
-    console.log(userInfo.data);
+    const { userInfo, update, setUpdate } = useContext(UserContext);
+    const userData = userInfo.data
+
+    if(userData === undefined) {
+        window.location = "http://localhost:9000";
+    }
 
     useEffect(() => {
         const request = axios.get("https://mock-api.bootcamp.respondeai.com.br/api/v1/linkr/posts?offset=0&limit=5", {headers: {'User-token': userInfo.data.token}});
@@ -25,20 +29,24 @@ export default function Timeline() {
         request.catch(() => {
             alert("Houve uma falha ao obter os posts, por favor atualize a página");
         })
-    },[]);
-    console.log(posts);
+    },[update]);
+
+    const { avatar } = userData.user;
+
     return (
         <>
-            <Header/>
-            <MainContainer>
-                <InputPost/>
-            </MainContainer>
+            <Header avatar = {avatar} />
             <Container>
                 <Title>timeline</Title>
+                <InputPost 
+                userData = {userData} 
+                update = {update}
+                setUpdate = {setUpdate}
+                />
                 {
                     posts.length === 0 ?
                     <h1>Loading...</h1> :
-                    <ul>{posts.data.posts.map(p => <Post post={p}/>)}</ul>
+                    <ul>{posts.data.posts.map(p => <Post post={p} />)}</ul>
                 }
             </Container>
         </>

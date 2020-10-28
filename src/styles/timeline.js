@@ -2,9 +2,14 @@ import styled from 'styled-components';
 
 export const Container = styled.div`
     display: flex;
-    justify-content:space-between;
     background-color: #333;
     padding: 10%;
+
+    @media (max-width: 600px) {
+        display: block;
+        padding: 5%;
+    }
+
     .trendings{
         background: #171717;
         width: 300px;
@@ -12,6 +17,8 @@ export const Container = styled.div`
         color: #FFF;
         border-radius: 10px;
         margin-top: 80px;
+        margin-left: 200px;
+
         h1{
             padding: 15px;
             border-bottom: 1px solid #484848;
@@ -34,6 +41,10 @@ export const Title = styled.h1`
     font-family: 'Oswald', sans-serif;
     font-size: 40px;
     margin-bottom: 40px;
+
+    @media (max-width: 600px) {
+        margin-top: 40px;    
+    }
 `;
 
 export const PostSection = styled.div`
@@ -42,6 +53,11 @@ export const PostSection = styled.div`
     width: 600px;
     display: flex;
     border-radius: 10px;
+
+    @media (max-width: 600px) {
+        width: 100%;
+    }
+
     & > img{
         width: 50px;
         height: 50px;
@@ -155,6 +171,11 @@ display:flex;
 padding: 10px 20px;
 border-radius: 13px; 
 width: 600px;
+
+@media (max-width: 600px) {
+    width: 100%;
+}
+
 h1 {
     color:#707070;
     font-weight:300;

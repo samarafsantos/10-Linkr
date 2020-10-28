@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState } from 'react';
 import axios from "axios";
 import {useHistory} from "react-router-dom";
 import UserContext from '../contexts/UserContext';
+import styled from 'styled-components';
 
 export default function Trendings() {
     let history = useHistory();
@@ -32,9 +33,9 @@ export default function Trendings() {
         
         history.push("/hashtag/"+val.name);
     }
-    console.log(trendings);
     return (
         <div className="trendings">
+            <Trending>
             <h1>Trendings</h1>
             <ul>
             {
@@ -43,6 +44,14 @@ export default function Trendings() {
                 trendings.data.hashtags.map((h) => <li key={h.id} onClick={() => HashtagPage(h)}># {h.name}</li>)
             }
             </ul>
+            </Trending>
         </div>
     );
 }
+
+const Trending = styled.div`
+display: block;
+@media (max-width: 600px) {
+    display: none;
+}
+`

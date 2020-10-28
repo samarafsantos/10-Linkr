@@ -15,9 +15,21 @@ export const LoginTitle = styled.div`
     h1 {
         font-family: 'Passion One', cursive;
         font-size: 106px;
+
+        @media (max-width: 600px) {
+            font-size: 50px;
+        }
     }
     h2 {
         font-size: 43px;
+
+        @media (max-width: 600px) {
+            font-size: 20px;
+        }
+    }
+
+    @media (max-width: 600px) {
+        width: 50vw;
     }
 `;
 
@@ -47,5 +59,9 @@ export const LoginInfo = styled.form`
         font-size: 14px;
         display: block;
         color: white;
+    }
+
+    @media (max-width: 600px) {
+        width: 50vw;
     }
 `;

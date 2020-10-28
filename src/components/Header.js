@@ -24,7 +24,7 @@ export default function Header(props) {
     return (
         <>
             <HeaderContainer>
-                <h1>linkr</h1>
+                <h1 onClick={() => history.push("/timeline")}>linkr</h1>
                 <div>
                     {isDroped
                         ? <BsChevronUp onClick={dropDownMenu}/>

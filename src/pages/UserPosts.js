@@ -8,17 +8,20 @@ import { Container, Title } from '../styles/timeline';
 
 import UserContext from '../contexts/UserContext';
 
-export default function MyPosts() {
+export default function UserPosts(props) {
+    let URL = props.match.params;
+    console.log(URL);
+
     const [posts, setPosts] = useState([]);
     const { userInfo, update, setUpdate } = useContext(UserContext);
     const userData = userInfo.data;
-    console.log(userData);
+
     if(userData === undefined) {
         window.location = "http://localhost:9000";
     }
 
     useEffect(() => {
-        const request = axios.get(`https://mock-api.bootcamp.respondeai.com.br/api/v1/linkr/users/${userData.user.id}/posts?offset=0&limit=15`, {headers: {'User-token': userInfo.data.token}});
+        const request = axios.get(`https://mock-api.bootcamp.respondeai.com.br/api/v1/linkr/users/${URL.id}/posts?offset=0&limit=15`, {headers: {'User-token': userInfo.data.token}});
         request.then((response) => {
             if(response.length===0){
                 alert("Nenhum post encontrado");
@@ -32,13 +35,13 @@ export default function MyPosts() {
     },[update]);
 
     const { avatar } = userData.user;
-    
+    console.log(posts);
     return (
         <>
             <Header avatar = {avatar} />
             <Container>
                 <div>
-                    <Title>My posts</Title>
+                    {posts.length !== 0 && <Title>{posts.data.posts[0].user.username}'s posts</Title>}
                     {
                         posts.length === 0 ?
                         <h1>Loading...</h1> :

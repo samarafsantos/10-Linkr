@@ -5,6 +5,8 @@ import Login from '../pages/Login';
 import SignUp from '../pages/SingUp';
 import Timeline from '../pages/Timeline';
 import MyPosts from '../pages/MyPosts';
+import UserPosts from '../pages/UserPosts';
+import Hashtag from '../pages/Hashtag';
 import UserContext from '../contexts/UserContext';
 
 export default function App() {
@@ -16,6 +18,8 @@ export default function App() {
         <UserContext.Provider value={{ userInfo, setUserInfo, update, setUpdate }}>
             <Router>
                 <Switch>
+                    <Route path="/hashtag/:hashtag" component={Hashtag} exact />
+                    <Route path="/user/:id" component={UserPosts} exact />
                     <Route path="/MyPosts" component={MyPosts} exact />
                     <Route path="/Timeline" component={Timeline} exact />
                     <Route path="/Signup" component={SignUp} exact />

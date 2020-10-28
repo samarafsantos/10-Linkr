@@ -2,9 +2,30 @@ import styled from 'styled-components';
 
 export const Container = styled.div`
     display: flex;
-    flex-direction: column;
+    justify-content:space-between;
     background-color: #333;
     padding: 10%;
+    .trendings{
+        background: #171717;
+        width: 300px;
+        height: fit-content;
+        color: #FFF;
+        border-radius: 10px;
+        margin-top: 80px;
+        h1{
+            padding: 15px;
+            border-bottom: 1px solid #484848;
+        }
+        ul{
+            padding: 15px;
+            li{
+                padding-bottom: 5px;
+                &:hover{
+                    cursor: pointer;
+                }
+            }
+        }
+    }
 `;
 
 export const Title = styled.h1`
@@ -27,6 +48,9 @@ export const PostSection = styled.div`
         border-radius: 50%;
         margin: 15px;
         flex-shrink:0;
+        &:hover{
+            cursor: pointer;
+        }
     }
     .post{
         width: 80%;
@@ -35,17 +59,22 @@ export const PostSection = styled.div`
     h2{
         color: #FFF;
         font-size:19px;
+        &:hover{
+            cursor: pointer;
+        }
     }
     p{
         color: #B7B7B7;
         margin-top:5px;
     }
+    span {
+        color: #FFF;
+        font-weight: bold;  
+        &:hover{
+            cursor:pointer;
+        }
+    }
 
-    /*a {
-        text-decoration: underline;
-        font-size: 14px;
-        display: block;
-    } */
 `;
 
 export const Snippet = styled.div`
@@ -78,6 +107,9 @@ export const Snippet = styled.div`
         margin-top: 15px;
         /* overflow: hidden; */
     }
+    &:hover{
+        cursor:pointer;
+    }
 `;
 export const HeaderContainer = styled.header `
 position:fixed;
@@ -94,6 +126,9 @@ h1 {
     font-weight:bold;
     color:white;
     font-size:49px;
+    &:hover{
+        cursor: pointer;
+    }
 }
 & > div {
     display: flex;

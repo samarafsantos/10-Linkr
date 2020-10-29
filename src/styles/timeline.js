@@ -2,6 +2,7 @@ import styled from 'styled-components';
 
 export const Container = styled.div`
     display: flex;
+    justify-content: center;
     background-color: #333;
     padding: 10%;
 
@@ -20,13 +21,16 @@ export const Container = styled.div`
         margin-left: 200px;
 
         h1{
-            padding: 15px;
+            padding: 20px;
+            font-size: 20px;
             border-bottom: 1px solid #484848;
         }
         ul{
             padding: 15px;
             li{
-                padding-bottom: 5px;
+                padding-bottom: 20px;
+                font-size: 20px;
+
                 &:hover{
                     cursor: pointer;
                 }
@@ -50,7 +54,7 @@ export const Title = styled.h1`
 export const PostSection = styled.div`
     margin-top: 20px;
     background: #171717;
-    width: 600px;
+    width: 700px;
     display: flex;
     border-radius: 10px;
 
@@ -71,6 +75,8 @@ export const PostSection = styled.div`
     .post{
         width: 80%;
         padding: 15px;
+        @media (max-width: 600px) {
+            padding: 10px;       
     }
     h2{
         color: #FFF;
@@ -121,13 +127,12 @@ export const Snippet = styled.div`
         text-decoration: underline;
         font-size: 10px;
         margin-top: 15px;
-        /* overflow: hidden; */
     }
     &:hover{
         cursor:pointer;
     }
 `;
-export const HeaderContainer = styled.header `
+export const HeaderContainer = styled.header`
 position:fixed;
 top:0;
 width:100%;
@@ -165,12 +170,12 @@ svg {
 }
 `
 
-export const InputContainer = styled.article `
+export const InputContainer = styled.article`
 background: #FFF;
 display:flex;
 padding: 10px 20px;
 border-radius: 13px; 
-width: 600px;
+width: 700px;
 
 @media (max-width: 600px) {
     width: 100%;

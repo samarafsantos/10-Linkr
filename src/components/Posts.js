@@ -5,28 +5,28 @@ import { useHistory } from "react-router-dom";
 import { Snippet, PostSection } from '../styles/timeline';
 
 export default function Post(props) {
-    const {post} = props;
+    const { post } = props;
     let history = useHistory();
 
-    function Profile(user){
+    function Profile(user) {
         const id = user.id;
         console.log(user);
-        history.push("/user/"+id);
+        history.push("/user/" + id);
     }
 
-    function HashtagPage(val){
+    function HashtagPage(val) {
         console.log(val);
         const hash = val.split('#');
-        history.push("/hashtag/"+hash[1]);
+        history.push("/hashtag/" + hash[1]);
     }
 
     return (
         <PostSection>
-            <img src={post.user.avatar} onClick={() => Profile(post.user)}/>
+            <img src={post.user.avatar} onClick={() => Profile(post.user)} />
             <div className="post">
                 <h2 onClick={() => Profile(post.user)}>{post.user.username}</h2>
                 <p><ReactHashtag onHashtagClick={val => HashtagPage(val)}>
-                {post.text}
+                    {post.text}
                 </ReactHashtag></p>
                 <Snippet onClick={() => window.open(post.link)}>
                     <div>

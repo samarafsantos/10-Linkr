@@ -14,8 +14,8 @@ export default function Login() {
 
     function sendRequest(event) {
         event.preventDefault();
-        if(clicked) return;
-        if(email === '' || password === '') {
+        if (clicked) return;
+        if (email === '' || password === '') {
             alert('Por favor, preencha todos os campos');
             return;
         }
@@ -40,16 +40,16 @@ export default function Login() {
                 <h2>save, share and discover the best links on the web</h2>
             </LoginTitle>
             <LoginInfo onSubmit={sendRequest}>
-                <input 
-                    type='email' 
-                    onChange={e => setEmail(e.target.value)} 
-                    value={email} 
+                <input
+                    type='email'
+                    onChange={e => setEmail(e.target.value)}
+                    value={email}
                     placeholder='e-mail'
                 />
-                <input 
+                <input
                     type='password'
-                    onChange={e => setPassword(e.target.value)} 
-                    value={password} 
+                    onChange={e => setPassword(e.target.value)}
+                    value={password}
                     placeholder='password'
                 />
                 <button type='submit'>Log In</button>

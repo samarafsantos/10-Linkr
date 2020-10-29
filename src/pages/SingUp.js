@@ -1,6 +1,6 @@
-import React, { useState, useContext} from 'react';
+import React, { useState, useContext } from 'react';
 import axios from 'axios';
-import { Link,  useHistory } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 
 import { Container, LoginTitle, LoginInfo } from '../styles/login';
 import UserContext from '../contexts/UserContext';
@@ -17,9 +17,9 @@ export default function SignUp() {
     function sendRequest(event) {
         event.preventDefault();
 
-        if(clicked)  return;
+        if (clicked) return;
 
-        if(email === '' || password === '' || username === '' || pictureUrl === '') {
+        if (email === '' || password === '' || username === '' || pictureUrl === '') {
             alert('Por favor, preencha todos os campos');
             return;
         }
@@ -30,7 +30,7 @@ export default function SignUp() {
 
         request.then(response => {
             const data = response.data;
-            setUserInfo({...userInfo, data});
+            setUserInfo({ ...userInfo, data });
             history.push("/Timeline");
         });
 
@@ -44,28 +44,28 @@ export default function SignUp() {
                 <h2>save, share and discover the best links on the web</h2>
             </LoginTitle>
             <LoginInfo onSubmit={sendRequest}>
-                <input 
-                    type='email' 
-                    onChange={e => setEmail(e.target.value)} 
-                    value={email} 
+                <input
+                    type='email'
+                    onChange={e => setEmail(e.target.value)}
+                    value={email}
                     placeholder='e-mail'
                 />
-                <input 
+                <input
                     type='password'
-                    onChange={e => setPassword(e.target.value)} 
-                    value={password} 
+                    onChange={e => setPassword(e.target.value)}
+                    value={password}
                     placeholder='password'
                 />
-                <input 
+                <input
                     type='text'
-                    onChange={e => setUsername(e.target.value)} 
-                    value={username} 
+                    onChange={e => setUsername(e.target.value)}
+                    value={username}
                     placeholder='username'
                 />
-                <input 
+                <input
                     type='url'
-                    onChange={e => setPictureUrl(e.target.value)} 
-                    value={pictureUrl} 
+                    onChange={e => setPictureUrl(e.target.value)}
+                    value={pictureUrl}
                     placeholder='picture url'
                 />
                 <button type='submit'>Log In</button>

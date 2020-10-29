@@ -47,7 +47,7 @@ export default function Timeline() {
                     {
                         posts.length === 0 ?
                             <h1>Loading...</h1> :
-                            <ul>{posts.data.posts.map(p => <Post post={p} />)}</ul>
+                            <ul>{posts.data.posts.map(p => <Post post={p} />)}</ul> 
                     }
                 </div>
                 <Trendings />

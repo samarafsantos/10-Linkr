@@ -1,5 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react';
 import axios from "axios";
+import InfiniteScroll from "react-infinite-scroll-component";
 import Header from '../components/Header';
 import InputPost from '../components/InputPost';
 import Post from "../components/Posts";
@@ -12,7 +13,7 @@ import UserContext from '../contexts/UserContext';
 export default function Timeline() {
     const [posts, setPosts] = useState([]);
     const { userInfo, update, setUpdate } = useContext(UserContext);
-    const userData = userInfo.data
+    const userData = userInfo.data;
 
     if (userData === undefined) {
         window.location = "http://localhost:9000";

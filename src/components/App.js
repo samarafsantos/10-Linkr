@@ -11,7 +11,7 @@ export default function App() {
 
     return (
         <UserContext.Provider value={{ userInfo, setUserInfo, update, setUpdate }}>
-            <Router>
+            <Router basename="/10-Linkr">
                 <AnimationStyle />  
             </Router>
         </UserContext.Provider>

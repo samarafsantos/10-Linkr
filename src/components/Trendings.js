@@ -9,6 +9,8 @@ export default function Trendings() {
     const [trendings, setTrendings] = useState([]);
     const { userInfo, update, setUpdate } = useContext(UserContext);
     const userData = userInfo.data
+    const [search, setSearch] = useState('');
+
 
     if (userData === undefined) {
         window.location = "http://localhost:9000";
@@ -33,10 +35,31 @@ export default function Trendings() {
 
         history.push("/hashtag/" + val.name);
     }
+
+    function searchHashtag(event) {
+        event.preventDefault();
+
+        if(search==='') {
+            alert("Preencha o campo com um assunto");
+        }
+        else {
+            history.push({ pathname:`/hashtag/${search}`, state: search });
+            setUpdate(!update);
+        }
+    }
     return (
         <div className="trendings">
             <Trending>
                 <h1>Trendings</h1>
+                <HashtagSearch onSubmit={searchHashtag}>
+                <span>#</span>
+                <input 
+                type="search"
+                placeholder="Assunto"
+                onChange={e => setSearch(e.target.value)}
+                value={search}
+                />
+            </HashtagSearch>
                 <ul>
                     {
                         trendings.length === 0 ?
@@ -54,4 +77,28 @@ display: block;
 @media (max-width: 600px) {
     display: none;
 }
+`
+
+const HashtagSearch = styled.form `
+    width: 100%;
+    margin-bottom: 8px;
+    span {
+        font-size: 19px;
+        font-family: inherit;
+        font-weight: 700;
+    }
+    
+    input {
+        font-family: inherit;
+        width: 85%;
+        font-size: 19px;
+        outline: none;
+        border: none;
+        border-radius: 4px;
+        margin-left: 2px;
+        color: white;
+        background-color: #333;
+        font-weight: 700;
+    }
+    
 `

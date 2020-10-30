@@ -15,7 +15,6 @@ export default function Post(props) {
     }
 
     function HashtagPage(val) {
-        console.log(val);
         const hash = val.split('#');
         history.push("/hashtag/" + hash[1]);
     }

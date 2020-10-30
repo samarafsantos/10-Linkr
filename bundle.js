@@ -2923,7 +2923,7 @@ function App() {
       update: update,
       setUpdate: setUpdate
     }
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__.BrowserRouter, {basename: "/./10-Linkr"}, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_Animation__WEBPACK_IMPORTED_MODULE_1__.default, null)));
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__.BrowserRouter, {basename: "/10-Linkr"}, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_Animation__WEBPACK_IMPORTED_MODULE_1__.default, null)));
 }
 
 /***/ }),

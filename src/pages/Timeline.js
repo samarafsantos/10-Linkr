@@ -12,7 +12,7 @@ import UserContext from '../contexts/UserContext';
 
 export default function Timeline() {
     const [posts, setPosts] = useState([]);
-    const [page, setPage] = useState(1);
+    const [page, setPage] = useState(0);
     const [hasMore, SetHasMore] = useState(10);
     const [load, setLoad] = useState(false)
     const { userInfo, update, setUpdate } = useContext(UserContext);

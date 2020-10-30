@@ -7,7 +7,7 @@ import Post from "../components/Posts";
 import Trendings from "../components/Trendings";
 
 import { Container, Title } from '../styles/timeline';
-
+ 
 import UserContext from '../contexts/UserContext';
 
 export default function Timeline() {

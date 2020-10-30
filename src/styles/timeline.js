@@ -18,7 +18,7 @@ export const Container = styled.div`
         color: #FFF;
         border-radius: 10px;
         margin-top: 80px;
-        margin-left: 200px;
+        margin-left: 50px;
 
         h1{
             padding: 20px;

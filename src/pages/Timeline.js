@@ -38,6 +38,7 @@ export default function Timeline() {
     }, [update, page, hasMore]);
 
     const { avatar } = userData.user;
+    console.log(posts);
     return (
         <>
             <Header avatar={avatar} />
@@ -51,13 +52,13 @@ export default function Timeline() {
                     />
                     {
                         posts.length === 0 ?
-                            <h1>Loading...</h1> :
+                            (<h1>Loading...</h1>) :
                             <InfiniteScroll
-                                dataLength={posts.length}
+                                dataLength={posts.data.posts.length}
                                 next={() => {
                                     setPage(page+1);
                                     SetHasMore(hasMore+1)}}
-                                hasMore={true}>
+                                hasMore={posts.data.posts.length < hasMore ? false : true}>
                                 <ul>{posts.data.posts.map(p => <Post post={p} />)}</ul>
                             </InfiniteScroll>
                     }

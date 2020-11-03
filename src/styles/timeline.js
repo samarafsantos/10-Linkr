@@ -75,8 +75,16 @@ export const PostSection = styled.div`
     .post{
         width: 80%;
         padding: 15px;
+        & > div{
+            display: flex;
+            justify-content: space-between;
+            svg:hover{
+                cursor: pointer;
+            }
+        }
         @media (max-width: 600px) {
-            padding: 10px;       
+            padding: 10px;     
+        }  
     }
     h2{
         color: #FFF;
@@ -98,6 +106,8 @@ export const PostSection = styled.div`
     }
 
 `;
+
+
 
 export const Snippet = styled.div`
     word-break: break-word;

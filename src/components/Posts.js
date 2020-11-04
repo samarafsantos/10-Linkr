@@ -1,5 +1,6 @@
 import React, {useContext, useState} from 'react';
 import ReactModal from 'react-modal';
+import axios from "axios";
 import { FaRegTrashAlt } from "react-icons/fa";
 import ReactHashtag from "react-hashtag";
 import { useHistory } from "react-router-dom";
@@ -12,8 +13,9 @@ ReactModal.setAppElement('#root');
 export default function Post(props) {
     const { post } = props;
     let history = useHistory();
-    const { userInfo } = useContext(UserContext);
+    const { userInfo, update, setUpdate } = useContext(UserContext);
     const userId = userInfo.data.user.id;
+    const [clicked, setClicked] = useState(false);
 
     const [showModal, setShowModal] = useState(false);
     function handleOpenModal () {
@@ -23,8 +25,25 @@ export default function Post(props) {
         setShowModal(false);
     }
     function handleDeletion(deletePost){
-        setShowModal(false);
-        console.log(deletePost);
+        console.log("got here");
+        
+        if (clicked) return;
+
+        const request = axios.delete(`https://mock-api.bootcamp.respondeai.com.br/api/v1/linkr/posts/${deletePost.id}`, { headers: { 'User-token': userInfo.data.token } })
+        
+        setClicked(true);
+        
+        request.then(() => {
+            setShowModal(false);
+            setUpdate(!update);
+            console.log("requisição deu bom")
+        })
+        
+        request.catch(() => {
+            setShowModal(false);
+            setClicked(false);
+            alert("Não foi possível excluir o post");
+        })
     }
 
     function Profile(user) {

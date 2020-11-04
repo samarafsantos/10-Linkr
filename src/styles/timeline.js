@@ -78,6 +78,9 @@ export const PostSection = styled.div`
         & > div{
             display: flex;
             justify-content: space-between;
+            svg{
+                color: #FFF;
+            }
             svg:hover{
                 cursor: pointer;
             }
@@ -107,6 +110,35 @@ export const PostSection = styled.div`
 
 `;
 
+export const ModalContent = styled.div`
+    color: #FFF;
+    font-size: 20px;
+    text-align: center;
+    p{
+        margin-bottom: 15px;
+        padding: 0px 50px; 
+    }
+    div{
+        button{
+        padding: 5px 18px;
+        margin: 10px;
+        border-radius: 5px;
+        border: none;
+        &:first-child{
+            background: #FFF;
+            color: #1877F2;
+        };
+        
+        &:last-child{
+            background: #1877F2;
+            color: #FFF;
+        };
+        }
+        button:hover{
+            cursor:pointer;
+        }
+    } 
+`; 
 
 
 export const Snippet = styled.div`

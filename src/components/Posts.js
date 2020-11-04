@@ -1,11 +1,13 @@
 import React, {useContext, useState} from 'react';
-import Modal from 'react-bootstrap/Modal';
+import ReactModal from 'react-modal';
 import { FaRegTrashAlt } from "react-icons/fa";
 import ReactHashtag from "react-hashtag";
 import { useHistory } from "react-router-dom";
 import UserContext from '../contexts/UserContext';
 
-import { Snippet, PostSection } from '../styles/timeline';
+import { Snippet, PostSection, ModalContent } from '../styles/timeline';
+
+ReactModal.setAppElement('#root');
 
 export default function Post(props) {
     const { post } = props;
@@ -13,9 +15,17 @@ export default function Post(props) {
     const { userInfo } = useContext(UserContext);
     const userId = userInfo.data.user.id;
 
-    const [show, setShow] = useState(false);
-    const handleClose = () => setShow(false);
-    const handleShow = () => setShow(true); 
+    const [showModal, setShowModal] = useState(false);
+    function handleOpenModal () {
+        setShowModal(true);
+    }
+    function handleCloseModal () {
+        setShowModal(false);
+    }
+    function handleDeletion(deletePost){
+        setShowModal(false);
+        console.log(deletePost);
+    }
 
     function Profile(user) {
         const id = user.id;
@@ -28,28 +38,66 @@ export default function Post(props) {
         history.push("/hashtag/" + hash[1]);
     }
 
+    const style = {
+        overlay: { 
+            width: "100vw",
+            heigth: "100vh",
+            top: "0px",
+            left: "0px",
+            backgroundColor: "rgba(255, 255, 255, 0.85)"
+        },
+        content: { 
+            position: "fixed",
+            top: "150px",
+            left: "400px",
+            right:"400px",
+            bottom: "300px",
+            border: "1px solid rgb(204, 204, 204)",
+            backgroundColor: "#333",
+            overflow: "auto",
+            borderRadius: "4px",
+            outline: "none",
+            padding: "20px",
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "center",
+            alignItems: "center",
+            borderRadius: "30px",
+            color: "#FFF",
+            h1:{
+                color: "#FFF",
+                fontSize: "20px",
+                padding: "0px 50px",
+                textAlign: "center",
+                marginBottom: "15px",
+            }
+         }
+    };
+
     return (
         <>
-        <Modal show={show} onHide={handleClose}>
-            <Modal.Header closeButton>
-            <Modal.Title>Modal heading</Modal.Title>
-            </Modal.Header>
-            <Modal.Body>Woohoo, you're reading this text in a modal!</Modal.Body>
-            <Modal.Footer>
-                <button variant="secondary" onClick={handleClose}>
-                    Close
-                </button>
-                <button variant="primary" onClick={handleClose}>
-                    Save Changes
-                </button>
-            </Modal.Footer>
-        </Modal>
+        {/*  */}
+        
         <PostSection>
             <img src={post.user.avatar} onClick={() => Profile(post.user)} />
             <div className="post">
                 <div>
+                <ReactModal 
+                    isOpen={showModal}
+                    contentLabel="onRequestClose Example"
+                    onRequestClose={handleCloseModal}
+                    shouldCloseOnOverlayClick={false}
+                    style={style}>
+                    <ModalContent>
+                        <p>Tem certeza que deseja excluir essa publicação?</p>
+                        <div>
+                            <button onClick={handleCloseModal}>Não, voltar</button>
+                            <button onClick={() => handleDeletion(post)}>Sim, excluir</button>
+                        </div>
+                    </ModalContent>
+                </ReactModal>
                     <h2 onClick={() => Profile(post.user)}>{post.user.username}</h2>
-                    {post.user.id === userId ? <FaRegTrashAlt icon={FaRegTrashAlt} onClick={() => handleShow()}/> : ""}
+                    {post.user.id === userId ? <FaRegTrashAlt icon={FaRegTrashAlt} onClick={handleOpenModal}/> : ""}
                 </div>
                 <p><ReactHashtag onHashtagClick={val => HashtagPage(val)}>
                     {post.text}

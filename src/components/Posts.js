@@ -1,23 +1,30 @@
-import React, {useContext, useState} from 'react';
+import React, {useContext, useState, useEffect} from 'react';
 import ReactModal from 'react-modal';
 import axios from "axios";
-import { FaRegTrashAlt } from "react-icons/fa";
+import { FaRegTrashAlt, FaPencilAlt } from "react-icons/fa";
 import ReactHashtag from "react-hashtag";
 import { useHistory } from "react-router-dom";
+
 import UserContext from '../contexts/UserContext';
+import EditContext from '../contexts/EditContext';
+
+import Edit from '../components/Edit';
 
 import { Snippet, PostSection, ModalContent } from '../styles/timeline';
 
 ReactModal.setAppElement('#root');
 
 export default function Post(props) {
-    const { post } = props;
-    let history = useHistory();
-    const { userInfo, update, setUpdate } = useContext(UserContext);
+    const {post } = props;
+    const {userInfo, update, setUpdate } = useContext(UserContext);
     const userId = userInfo.data.user.id;
-    const [clicked, setClicked] = useState(false);
+    const {editing, setEditing, editClick, modified, textEdit, postId, setPostId} = useContext(EditContext);
 
+    const [clicked, setClicked] = useState(false);
     const [showModal, setShowModal] = useState(false);
+    
+    let history = useHistory();
+ 
     function handleOpenModal () {
         setShowModal(true);
     }
@@ -44,6 +51,17 @@ export default function Post(props) {
             setClicked(false);
             alert("Não foi possível excluir o post");
         })
+    }
+
+    function handleEdit(editPost){
+        if(editing){
+            setEditing(false);
+        }
+        else{
+            editClick();
+            setPostId(editPost.id);
+        }
+        console.log(editPost);
     }
 
     function Profile(user) {
@@ -116,11 +134,18 @@ export default function Post(props) {
                     </ModalContent>
                 </ReactModal>
                     <h2 onClick={() => Profile(post.user)}>{post.user.username}</h2>
-                    {post.user.id === userId ? <FaRegTrashAlt icon={FaRegTrashAlt} onClick={handleOpenModal}/> : ""}
+                    {post.user.id === userId ? <><FaPencilAlt icon={FaPencilAlt} onClick={() => handleEdit(post)}/><FaRegTrashAlt icon={FaRegTrashAlt} onClick={handleOpenModal}/></> : ""}
                 </div>
-                <p><ReactHashtag onHashtagClick={val => HashtagPage(val)}>
-                    {post.text}
-                </ReactHashtag></p>
+                {editing && post.user.id === userId && postId === post.id ? 
+                    <Edit text={post.text}/> :
+                    modified && post.user.id === userId && postId === post.id ? 
+                        <p><ReactHashtag onHashtagClick={val => HashtagPage(val)}>
+                            {textEdit}
+                        </ReactHashtag></p> :
+                        <p><ReactHashtag onHashtagClick={val => HashtagPage(val)}>
+                            {post.text}
+                        </ReactHashtag></p>
+                }
                 <Snippet onClick={() => window.open(post.link)}>
                     <div>
                         <h3>{post.linkTitle}</h3>

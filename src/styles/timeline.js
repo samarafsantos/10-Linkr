@@ -280,3 +280,31 @@ button {
     cursor: pointer;
 }
 `
+
+export const SearchContainer = styled.div`
+    position: relative;
+    & > svg {
+        color: #adaaaa;
+        cursor: auto;
+        position: fixed;
+        top: 19px;
+        left: 66%;
+    }
+`;
+
+export const UsersContainer = styled.div`
+    width: 38vw;
+    padding: 40px 10px 0px;
+    border-radius: 5px;
+    font-size: 16px;
+    background-color: #E7E7E7;
+    position: absolute;
+    top: 0px;
+    left: 0;
+    z-index: -1;
+    a {
+        display: block;
+        margin-bottom: 20px;
+        z-index: 10;
+    }
+    `

@@ -31,8 +31,6 @@ export default function Post(props) {
         setShowModal(false);
     }
     function handleDeletion(deletePost){
-        console.log("got here");
-        console.log(clicked);
         if (clicked) return;
 
         const request = axios.delete(`https://mock-api.bootcamp.respondeai.com.br/api/v1/linkr/posts/${deletePost.id}`, { headers: { 'User-token': userInfo.data.token } })
@@ -42,7 +40,6 @@ export default function Post(props) {
         request.then(() => {
             setShowModal(false);
             setUpdate(!update);
-            console.log("requisição deu bom")
         })
         
         request.catch(() => {
@@ -60,16 +57,14 @@ export default function Post(props) {
             editClick();
             setPostId(editPost.id);
         }
-        console.log(editPost);
     }
 
-    function Profile(user) {
+    function profile(user) {
         const id = user.id;
-        console.log(user);
         history.push("/user/" + id);
     }
 
-    function HashtagPage(val) {
+    function hashtagPage(val) {
         const hash = val.split('#');
         history.push("/hashtag/" + hash[1]);
     }
@@ -113,7 +108,7 @@ export default function Post(props) {
     return (
         <>
         <PostSection>
-            <img src={post.user.avatar} onClick={() => Profile(post.user)} />
+            <img src={post.user.avatar} onClick={() => profile(post.user)} />
             <div className="post">
                 <div>
                 <ReactModal 
@@ -130,16 +125,16 @@ export default function Post(props) {
                         </div>
                     </ModalContent>
                 </ReactModal>
-                    <h2 onClick={() => Profile(post.user)}>{post.user.username}</h2>
+                    <h2 onClick={() => profile(post.user)}>{post.user.username}</h2>
                     {post.user.id === userId ? <><FaPencilAlt icon={FaPencilAlt} onClick={() => handleEdit(post)}/><FaRegTrashAlt icon={FaRegTrashAlt} onClick={handleOpenModal}/></> : ""}
                 </div>
                 {editing && post.user.id === userId && postId === post.id ? 
                     <Edit text={post.text}/> :
                     modified && post.user.id === userId && postId === post.id ? 
-                        <p><ReactHashtag onHashtagClick={val => HashtagPage(val)}>
+                        <p><ReactHashtag onHashtagClick={val => hashtagPage(val)}>
                             {textEdit}
                         </ReactHashtag></p> :
-                        <p><ReactHashtag onHashtagClick={val => HashtagPage(val)}>
+                        <p><ReactHashtag onHashtagClick={val => hashtagPage(val)}>
                             {post.text}
                         </ReactHashtag></p>
                 }

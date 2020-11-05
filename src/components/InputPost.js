@@ -42,25 +42,23 @@ export default function InputPost(props) {
     }
 
     return (
-        <>
-            <InputContainer>
-                <img src={user.avatar} />
-                <div>
-                    <h1>O que você tem para favoritar hoje?</h1>
-                    <input
-                        placeholder="http://..."
-                        onChange={e => setLink(e.target.value)}
-                        value={link}
-                    />
-                    <textarea
-                        rows="5"
-                        placeholder="Comente sobre o link !"
-                        onChange={e => setText(e.target.value)}
-                        value={text}
-                    />
-                    <div><button onClick={publish}>{label}</button></div>
-                </div>
-            </InputContainer>
-        </>
+        <InputContainer>
+            <img src={user.avatar} />
+            <div>
+                <h1>O que você tem para favoritar hoje?</h1>
+                <input
+                    placeholder="http://..."
+                    onChange={e => setLink(e.target.value)}
+                    value={link}
+                />
+                <textarea
+                    rows="5"
+                    placeholder="Comente sobre o link !"
+                    onChange={e => setText(e.target.value)}
+                    value={text}
+                />
+                <div><button onClick={publish}>{label}</button></div>
+            </div>
+        </InputContainer>
     )
 }

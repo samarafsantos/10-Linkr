@@ -14,16 +14,16 @@ import UserContext from '../contexts/UserContext';
 export default function Timeline() {
     const [posts, setPosts] = useState([]);
     const [page, setPage] = useState(0);
-    const [hasMore, SetHasMore] = useState(10);
+    const [hasMore, setHasMore] = useState(10);
     const [load, setLoad] = useState(false);
     const [noFollow, setNoFollow] = useState(false);
     const { userInfo, update, setUpdate } = useContext(UserContext);
-
     const userData = userInfo.data;
 
     if (userData === undefined) {
         window.location = "http://localhost:9000";
     }
+
     useEffect(serverRequest, []);
 
     useEffect(() => {
@@ -44,7 +44,7 @@ export default function Timeline() {
                 }
                 else{
                     setPosts(response);
-                    setNoFollow(false);
+                    setNoFollow(false); 
                 }
             })
             request.catch(() => {
@@ -76,7 +76,7 @@ export default function Timeline() {
                                             dataLength={posts.data.posts.length}
                                             next={() => {
                                                 setPage(page+1);
-                                                SetHasMore(hasMore+1)}}
+                                                setHasMore(hasMore+1)}}
                                             hasMore={posts.data.posts.length < hasMore ? false : true}>
                                             <ul>{posts.data.posts.map(p => <Post post={p} />)}</ul>
                                         </InfiniteScroll>

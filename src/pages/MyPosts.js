@@ -12,7 +12,7 @@ import UserContext from '../contexts/UserContext';
 export default function MyPosts() {
     const [posts, setPosts] = useState([]);
     const [page, setPage] = useState(0);
-    const [hasMore, SetHasMore] = useState(10);
+    const [hasMore, setHasMore] = useState(10);
     const [load, setLoad] = useState(false)
     const { userInfo, update, setUpdate } = useContext(UserContext);
     const userData = userInfo.data;
@@ -51,7 +51,7 @@ export default function MyPosts() {
                                 dataLength={posts.data.posts.length}
                                 next={() => {
                                     setPage(page+1);
-                                    SetHasMore(hasMore+1)}}
+                                    setHasMore(hasMore+1)}}
                                 hasMore={posts.data.posts.length < hasMore ? false : true}>  
                             <ul>{posts.data.posts.map(p => <Post post={p} />)}</ul>
                             </InfiniteScroll>

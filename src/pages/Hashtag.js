@@ -13,7 +13,7 @@ export default function Hashtag(props) {
     let URL = props.match.params;
 
     const [page, setPage] = useState(0);
-    const [hasMore, SetHasMore] = useState(10);
+    const [hasMore, setHasMore] = useState(10);
     const [load, setLoad] = useState(false)
     const [posts, setPosts] = useState([]);
     const { userInfo, update, setUpdate } = useContext(UserContext);
@@ -52,7 +52,7 @@ export default function Hashtag(props) {
                                 dataLength={posts.data.posts.length}
                                 next={() => {
                                     setPage(page+1);
-                                    SetHasMore(hasMore+1)}}
+                                    setHasMore(hasMore+1)}}
                                 hasMore={posts.data.posts.length < hasMore ? false : true}>
                             <ul>{posts.data.posts.map(p => <Post post={p} />)}</ul>
                             </InfiniteScroll>

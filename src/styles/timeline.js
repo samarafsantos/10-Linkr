@@ -44,7 +44,6 @@ export const Title = styled.h1`
     font-weight: bold;
     font-family: 'Oswald', sans-serif;
     font-size: 40px;
-    margin-bottom: 40px;
 
     @media (max-width: 600px) {
         margin-top: 40px;    
@@ -52,7 +51,7 @@ export const Title = styled.h1`
 `;
 
 export const PostSection = styled.div`
-    margin-top: 20px;
+    margin-top: 40px;
     background: #171717;
     width: 700px;
     display: flex;
@@ -218,6 +217,7 @@ display:flex;
 padding: 10px 20px;
 border-radius: 13px; 
 width: 700px;
+margin-top: 40px;
 
 @media (max-width: 600px) {
     width: 100%;

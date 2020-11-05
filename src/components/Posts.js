@@ -1,4 +1,4 @@
-import React, {useContext, useState, useEffect} from 'react';
+import React, {useContext, useState} from 'react';
 import ReactModal from 'react-modal';
 import axios from "axios";
 import { FaRegTrashAlt, FaPencilAlt } from "react-icons/fa";
@@ -15,10 +15,10 @@ import { Snippet, PostSection, ModalContent } from '../styles/timeline';
 ReactModal.setAppElement('#root');
 
 export default function Post(props) {
-    const {post } = props;
-    const {userInfo, update, setUpdate } = useContext(UserContext);
+    const { post } = props;
+    const { userInfo, update, setUpdate } = useContext(UserContext);
     const userId = userInfo.data.user.id;
-    const {editing, setEditing, editClick, modified, textEdit, postId, setPostId} = useContext(EditContext);
+    const { editing, setEditing, editClick, modified, textEdit, postId, setPostId } = useContext(EditContext);
 
     const [clicked, setClicked] = useState(false);
     const [showModal, setShowModal] = useState(false);

@@ -1,11 +1,12 @@
 import React, { useContext, useEffect, useState } from 'react';
+import styled from 'styled-components';
 import axios from "axios";
 import InfiniteScroll from "react-infinite-scroll-component";
 import Header from '../components/Header';
 import Post from "../components/Posts";
 import Trendings from "../components/Trendings";
 
-import { Container, Title } from '../styles/timeline';
+import { Container } from '../styles/timeline';
 
 import UserContext from '../contexts/UserContext';
 
@@ -14,7 +15,7 @@ export default function UserPosts(props) {
 
     const [page, setPage] = useState(0);
     const [hasMore, SetHasMore] = useState(10);
-    const [load, setLoad] = useState(false)
+    const [load, setLoad] = useState(false);
 
     const [posts, setPosts] = useState([]);
     const { userInfo, update, setUpdate } = useContext(UserContext);
@@ -45,7 +46,6 @@ export default function UserPosts(props) {
             <Header avatar={avatar} />
             <Container>
                 <div>
-                    {posts.length !== 0 && <Title>{posts.data.posts[0].user.username}'s posts</Title>}
                     {
                         posts.length === 0 ?
                             <h1>Loading...</h1> :

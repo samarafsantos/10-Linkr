@@ -18,6 +18,7 @@ export default function Header(props) {
     const [focus, setFocus] = useState(false);
     const [search, setSearch] = useState('');
     const [searchedUsers, setSearchedUsers] = useState([]);
+    
 
     function dropDownMenu() {
         setIsDroped(!isDroped);
@@ -79,11 +80,11 @@ export default function Header(props) {
                         {searchedUsers.length 
                             ? searchedUsers.map((u, i) => (
                                 (u.isFollowingLoggedUser)
-                                    ? <Link to={{ pathname:`/UserPosts:${u.id}`, state: { id: u.id , username: u.username }}} key={u.id} >
+                                    ? <Link to={{ pathname:`/user/${u.id}`}} key={i} >
                                         <img src={u.avatar} />
                                         <p>{u.username} <span>• following</span></p>
                                     </Link>
-                                    : <Link to={{ pathname:`/UserPosts:${u.id}`, state: { id: u.id , username: u.username }}} key={i}>
+                                    : <Link to={{ pathname:`/user/${u.id}`}} key={i}>
                                         <img src={u.avatar} />
                                         <p>{u.username}</p>
                                     </Link>

@@ -180,6 +180,11 @@ export const Snippet = styled.div`
     &:hover{
         cursor:pointer;
     }
+    .youtube {
+        display: block;
+        width: 100%;
+        padding: 10px;
+    }
 `;
 export const HeaderContainer = styled.header`
 position:fixed;

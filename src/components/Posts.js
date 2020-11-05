@@ -1,13 +1,13 @@
-import React, {useContext, useState} from 'react';
+import React, {useContext, useState, useEffect} from 'react';
 import ReactModal from 'react-modal';
 import axios from "axios";
 import { FaRegTrashAlt, FaPencilAlt } from "react-icons/fa";
 import ReactHashtag from "react-hashtag";
 import { useHistory } from "react-router-dom";
-
 import UserContext from '../contexts/UserContext';
 import EditContext from '../contexts/EditContext';
-
+import ReactPlayer from 'react-player'
+import styled from 'styled-components';
 import Edit from '../components/Edit';
 
 import { Snippet, PostSection, ModalContent } from '../styles/timeline';
@@ -15,11 +15,10 @@ import { Snippet, PostSection, ModalContent } from '../styles/timeline';
 ReactModal.setAppElement('#root');
 
 export default function Post(props) {
-    const { post } = props;
-    const { userInfo, update, setUpdate } = useContext(UserContext);
+    const {post } = props;
+    const {userInfo, update, setUpdate } = useContext(UserContext);
     const userId = userInfo.data.user.id;
-    const { editing, setEditing, editClick, modified, textEdit, postId, setPostId } = useContext(EditContext);
-
+    const {editing, setEditing, editClick, modified, textEdit, postId, setPostId} = useContext(EditContext);
     const [clicked, setClicked] = useState(false);
     const [showModal, setShowModal] = useState(false);
     
@@ -132,7 +131,7 @@ export default function Post(props) {
                     </ModalContent>
                 </ReactModal>
                     <h2 onClick={() => Profile(post.user)}>{post.user.username}</h2>
-                    {post.user.id === userId ? <div><FaPencilAlt icon={FaPencilAlt} onClick={() => handleEdit(post)}/><FaRegTrashAlt icon={FaRegTrashAlt} onClick={handleOpenModal}/></div> : ""}
+                    {post.user.id === userId ? <><FaPencilAlt icon={FaPencilAlt} onClick={() => handleEdit(post)}/><FaRegTrashAlt icon={FaRegTrashAlt} onClick={handleOpenModal}/></> : ""}
                 </div>
                 {editing && post.user.id === userId && postId === post.id ? 
                     <Edit text={post.text}/> :
@@ -145,15 +144,45 @@ export default function Post(props) {
                         </ReactHashtag></p>
                 }
                 <Snippet onClick={() => window.open(post.link)}>
+                
+                {post.link.includes("youtube") ? (
+                <div className="youtube">
+                <PlayerContainer>
+                <YoutubePlayer url={post.link} controls={true} width={"100%"} />
+                <a href="">{post.link}</a>
+                </PlayerContainer> </div>
+            ) : (
+                <>
                     <div>
                         <h3>{post.linkTitle}</h3>
                         <p>{post.linkDescription}</p>
                         <a href="">{post.link}</a>
                     </div>
-                    <img src={post.linkImage} />
-                </Snippet>
+                    <img src={post.linkImage} /> </>
+                  
+            )}
+              </Snippet>
+                
             </div>
         </PostSection>
     </>
     );
 }
+
+
+
+const PlayerContainer = styled.div`
+  margin-top: 20px;
+  margin-bottom: 10px;
+  width: 100%
+  @media (max-width: 600px) {
+    margin: 5px 0;
+  }
+`;
+
+const YoutubePlayer = styled(ReactPlayer)`
+  margin-bottom: 10px;
+  @media (max-width: 600px) {
+    margin: 5px 0;
+  }
+`;

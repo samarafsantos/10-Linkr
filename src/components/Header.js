@@ -1,16 +1,24 @@
-import React, { useState, useContext } from 'react'
+import React, { useState, useContext, useEffect } from 'react'
 import { BsChevronDown, BsChevronUp } from 'react-icons/bs';
 import styled from 'styled-components';
 import { Link, useHistory } from 'react-router-dom';
-
+import { IoMdSearch } from 'react-icons/io';
 import UserContext from '../contexts/UserContext'
-import { HeaderContainer } from '../styles/timeline'
+import { HeaderContainer, SearchContainer, UsersContainer } from '../styles/timeline'
+import { DebounceInput } from 'react-debounce-input';
+import axios from "axios";
+
 
 export default function Header(props) {
-    const { avatar } = props;
+    const { avatar, id } = props;
     const [isDroped, setIsDroped] = useState(false);
-    const { setUserInfo } = useContext(UserContext);
+    const { setUserInfo, userInfo } = useContext(UserContext);
+    const userData = userInfo.data;
     const history = useHistory();
+    const [focus, setFocus] = useState(false);
+    const [search, setSearch] = useState('');
+    const [searchedUsers, setSearchedUsers] = useState([]);
+    
 
     function dropDownMenu() {
         setIsDroped(!isDroped);
@@ -21,10 +29,76 @@ export default function Header(props) {
         history.push('/');
     }
 
+    useEffect(() => {
+
+        if(search.length < 3) {
+            setSearchedUsers([]);
+            return;
+        }
+
+        const request = axios.get(`https://mock-api.bootcamp.respondeai.com.br/api/v1/linkr/users/search?username=${search}`, {headers: {"User-Token": userData.token}});
+
+        request.then(response => {
+            let followed = [];
+            let unfollowed = [];
+            response.data.users.forEach(i => {
+                if(i.id === id);
+                else if(i.isFollowingLoggedUser) {
+                    followed.push(i);
+                } else {
+                    unfollowed.push(i);
+                }
+            });
+            setSearchedUsers([...followed, ...unfollowed]);
+        });
+    }, [search]);
+
+    function resetInput() {
+        setFocus(false);
+        setSearchedUsers([])
+    }
+
+    function Profile(id) {
+        console.log("clicou");
+        history.push("/user/" + id);
+    }
+
+    console.log(searchedUsers);
     return (
         <>
             <HeaderContainer>
                 <h1 onClick={() => history.push("/timeline")}>linkr</h1>
+                <SearchContainer>
+                    <DebounceInput
+                        placeholder= {focus ? '' : 'Search for people and friends'}
+                        onFocus={() => setFocus(true)}
+                        // onBlur={() => resetInput()}
+                        minLength={3}
+                        debounceTimeout={300}
+                        onChange={(e) => setSearch(e.target.value)}
+                    />
+                    {focus
+                        ? ''
+                        : <IoMdSearch />
+                    }
+                    <UsersContainer>
+                        {searchedUsers.length 
+                            ? searchedUsers.map((u, i) => (
+                                (u.isFollowingLoggedUser)
+                                    ? <Link to={{ pathname:`/user/${u.id}`}} key={i}>
+                                        <img src={u.avatar} />
+                                        <p>{u.username} <span>• following</span></p>
+                                    </Link>
+                                    : <Link to={{ pathname:`/user/${u.id}`}} key={i}>
+                                        <img src={u.avatar} />
+                                        <p>{u.username}</p>
+                                    </Link>
+                            ))
+                            : ''
+                        }
+                    </UsersContainer>
+                </SearchContainer>
+
                 <div>
                     {isDroped
                         ? <BsChevronUp onClick={dropDownMenu} />

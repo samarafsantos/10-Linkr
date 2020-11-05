@@ -10,7 +10,6 @@ import Trendings from "../components/Trendings";
 import { Container, Title } from '../styles/timeline';
  
 import UserContext from '../contexts/UserContext';
-import EditContext from '../contexts/EditContext';
 
 export default function Timeline() {
     const [posts, setPosts] = useState([]);
@@ -18,7 +17,6 @@ export default function Timeline() {
     const [hasMore, SetHasMore] = useState(10);
     const [load, setLoad] = useState(false)
     const { userInfo, update, setUpdate } = useContext(UserContext);
-    const {editing, setEditing} = useContext(EditContext);
 
     const userData = userInfo.data;
 

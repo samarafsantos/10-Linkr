@@ -134,7 +134,7 @@ export default function Post(props) {
                     </ModalContent>
                 </ReactModal>
                     <h2 onClick={() => Profile(post.user)}>{post.user.username}</h2>
-                    {post.user.id === userId ? <><FaPencilAlt icon={FaPencilAlt} onClick={() => handleEdit(post)}/><FaRegTrashAlt icon={FaRegTrashAlt} onClick={handleOpenModal}/></> : ""}
+                    {post.user.id === userId ? <div><FaPencilAlt icon={FaPencilAlt} onClick={() => handleEdit(post)}/><FaRegTrashAlt icon={FaRegTrashAlt} onClick={handleOpenModal}/></div> : ""}
                 </div>
                 {editing && post.user.id === userId && postId === post.id ? 
                     <Edit text={post.text}/> :

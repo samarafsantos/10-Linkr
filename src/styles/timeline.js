@@ -44,7 +44,6 @@ export const Title = styled.h1`
     font-weight: bold;
     font-family: 'Oswald', sans-serif;
     font-size: 40px;
-    margin-bottom: 40px;
 
     @media (max-width: 600px) {
         margin-top: 40px;    
@@ -52,7 +51,7 @@ export const Title = styled.h1`
 `;
 
 export const PostSection = styled.div`
-    margin-top: 20px;
+    margin-top: 40px;
     background: #171717;
     width: 700px;
     display: flex;
@@ -73,13 +72,14 @@ export const PostSection = styled.div`
         }
     }
     .post{
-        width: 80%;
+        width: 90%;
         padding: 15px;
         & > div{
             display: flex;
             justify-content: space-between;
             svg{
                 color: #FFF;
+                margin: 0 5px;
             }
             svg:hover{
                 cursor: pointer;
@@ -218,6 +218,7 @@ display:flex;
 padding: 10px 20px;
 border-radius: 13px; 
 width: 700px;
+margin-top: 40px;
 
 @media (max-width: 600px) {
     width: 100%;
@@ -280,3 +281,43 @@ button {
     cursor: pointer;
 }
 `
+
+export const SearchContainer = styled.div`
+    position: relative;
+    & > svg {
+        color: #adaaaa;
+        cursor: auto;
+        position: fixed;
+        top: 19px;
+        left: 66%;
+    }
+    input{
+        width: 480px;
+        height: 40px;
+        border: none;
+        border-radius: 8px;
+    }
+    input::placeholder{
+        padding-left:10px;
+    }
+`;
+
+export const UsersContainer = styled.div`
+    width: 38vw;
+    padding: 40px 0px 0px 15px;
+    border-radius: 5px;
+    font-size: 16px;
+    background-color: #E7E7E7;
+    position: absolute;
+    top: 0px;
+    left: 0;
+    z-index: -1;
+    a {
+        display: block;
+        margin-bottom: 20px;
+        z-index: 10;
+    }
+    img{
+        margin-top:10px;
+    }
+    `

@@ -16,6 +16,7 @@ export default function MyPosts() {
     const [load, setLoad] = useState(false)
     const { userInfo, update, setUpdate } = useContext(UserContext);
     const userData = userInfo.data;
+    
     if (userData === undefined) {
         window.location = "http://localhost:9000";
     }

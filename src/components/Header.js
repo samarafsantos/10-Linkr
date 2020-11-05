@@ -53,16 +53,6 @@ export default function Header(props) {
         });
     }, [search]);
 
-    function resetInput() {
-        setFocus(false);
-        setSearchedUsers([])
-    }
-
-    function Profile(id) {
-        console.log("clicou");
-        history.push("/user/" + id);
-    }
-
     console.log(searchedUsers);
     return (
         <>
@@ -72,7 +62,6 @@ export default function Header(props) {
                     <DebounceInput
                         placeholder= {focus ? '' : 'Search for people and friends'}
                         onFocus={() => setFocus(true)}
-                        // onBlur={() => resetInput()}
                         minLength={3}
                         debounceTimeout={300}
                         onChange={(e) => setSearch(e.target.value)}

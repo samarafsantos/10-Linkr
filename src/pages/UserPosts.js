@@ -63,7 +63,7 @@ export default function UserPosts(props) {
                     <>
                     {isFollowing
                             ? <Button onClick={() => Follow(clicked, setClicked, id, userData, isFollowing, setIsFollowig)}>unfollow</Button>
-                            : <Button onClick={() => Follow(clicked, setClicked, id, userData, isFollowing, setIsFollowig)}>follow</Button>
+                            : URL.id == userId ? null : <Button onClick={() => Follow(clicked, setClicked, id, userData, isFollowing, setIsFollowig,update,setUpdate)}>follow</Button>
                         }
                         </>
                     </ConteinerFollow>
@@ -87,7 +87,7 @@ export default function UserPosts(props) {
     );
 }
 
-function Follow(clicked, setClicked, id, userData, isFollowing, setIsFollowig) {
+function Follow(clicked, setClicked, id, userData, isFollowing, setIsFollowig, update, setUpdate) {
 
     if(clicked) return;
     let request;
@@ -101,7 +101,7 @@ function Follow(clicked, setClicked, id, userData, isFollowing, setIsFollowig) {
     request.then(() => {
         setIsFollowig(!isFollowing);
         setClicked(false);
-        console.log(isFollowing)
+        setUpdate(!update);
     });
 
     request.catch(() => {
@@ -114,8 +114,10 @@ function Follow(clicked, setClicked, id, userData, isFollowing, setIsFollowig) {
 const ConteinerFollow = styled.div`
     display: flex;
     justify-content: space-between;
-    `
-    const Button = styled.button`
+    align-items: center;
+`
+
+const Button = styled.button`
     font-family: inherit;
     font-size: 14px;
     font-weight: 700;
@@ -127,4 +129,4 @@ const ConteinerFollow = styled.div`
     margin-top: 5px;
     outline: none;
     cursor: pointer;
-    `
+`

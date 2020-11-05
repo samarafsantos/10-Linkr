@@ -33,7 +33,7 @@ export default function Post(props) {
     }
     function handleDeletion(deletePost){
         console.log("got here");
-        
+        console.log(clicked);
         if (clicked) return;
 
         const request = axios.delete(`https://mock-api.bootcamp.respondeai.com.br/api/v1/linkr/posts/${deletePost.id}`, { headers: { 'User-token': userInfo.data.token } })
@@ -113,8 +113,6 @@ export default function Post(props) {
 
     return (
         <>
-        {/*  */}
-        
         <PostSection>
             <img src={post.user.avatar} onClick={() => Profile(post.user)} />
             <div className="post">

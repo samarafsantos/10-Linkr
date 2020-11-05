@@ -11,6 +11,13 @@ export const Container = styled.div`
         padding: 5%;
     }
 
+    & > div{
+        h1{
+            margin: 15px;
+            color: #FFF;
+        }
+    }
+
     .trendings{
         background: #171717;
         width: 300px;

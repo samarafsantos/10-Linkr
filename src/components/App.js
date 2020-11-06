@@ -12,7 +12,7 @@ export default function App() {
     return (
         <UserContext.Provider value={{ userInfo, setUserInfo, update, setUpdate }}>
             <EditProvider>
-                <Router>
+                <Router basename="/10-Linkr">
                     <AnimationStyle />
                 </Router>
             </EditProvider>

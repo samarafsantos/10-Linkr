@@ -30,7 +30,7 @@ export const Container = styled.div`
         height: fit-content;
         color: #FFF;
         border-radius: 10px;
-        margin-top: 90px;
+        margin-top: 120px;
         margin-left: 50px;
 
         h1{
@@ -257,7 +257,7 @@ display:flex;
 padding: 10px 20px;
 border-radius: 13px; 
 width: 700px;
-margin-top: 40px;
+margin-top: 65px;
 
 @media (max-width: 600px) {
     width: 100%;

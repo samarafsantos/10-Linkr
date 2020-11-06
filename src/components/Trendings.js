@@ -72,6 +72,7 @@ export default function Trendings() {
 
 const Trending = styled.div`
 display: block;
+overflow: hidden;
 @media (max-width: 600px) {
     display: none;
 }

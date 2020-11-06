@@ -257,7 +257,7 @@ display:flex;
 padding: 10px 20px;
 border-radius: 13px; 
 width: 700px;
-margin-top: 65px;
+margin-top: 80px;
 
 @media (max-width: 600px) {
     width: 100%;

@@ -134,6 +134,8 @@ export const PostSection = styled.div`
         }
     }
 
+    overflow: hidden;
+
 `;
 
 export const ModalContent = styled.div`

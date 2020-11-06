@@ -37,7 +37,6 @@ export default function MyPosts() {
     }, [update, page]);
 
     const { avatar } = userData.user;
-    console.log(posts);
     return (
         <>
             <Header avatar={avatar} />

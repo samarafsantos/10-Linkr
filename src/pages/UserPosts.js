@@ -31,11 +31,11 @@ export default function UserPosts(props) {
                 alert("Nenhum post encontrado");
                 return;
             }
-            setInfo(response);         
+            setInfo(response);
         })
         request.catch(() => {
             alert("Houve uma falha ao obter os posts, por favor atualize a página");
-            
+
         })
     }, []);
 
@@ -46,21 +46,21 @@ export default function UserPosts(props) {
                 alert("Nenhum post encontrado");
                 return;
             }
-            setPosts(response); 
-            setLoad(true);            
+            setPosts(response);
+            setLoad(true);
         })
         request.catch(() => {
             alert("Houve uma falha ao obter os posts, por favor atualize a página");
-            setLoad(false);  
+            setLoad(false);
         })
     }, [update, page]);
 
     useEffect(() => {
-        const request = axios.get('https://mock-api.bootcamp.respondeai.com.br/api/v1/linkr/users/follows', {headers: {"User-Token": userData.token }});
+        const request = axios.get('https://mock-api.bootcamp.respondeai.com.br/api/v1/linkr/users/follows', { headers: { "User-Token": userData.token } });
 
         request.then(response => {
             response.data.users.forEach(i => {
-                if(i.id === id) {
+                if (i.id === id) {
                     setIsFollowig(true);
                 }
             });
@@ -74,27 +74,28 @@ export default function UserPosts(props) {
             <Header avatar={avatar} id={userId} />
             <Container>
                 <div>
-                <ConteinerFollow>
-                    <div className="name">
-                    {info.length !== 0 && <><img src={info.data.user.avatar} alt="" /><Title>{info.data.user.username}'s posts</Title></>}</div>
-                    
-                    <>
-                    {isFollowing
-                            ? <Button onClick={() => Follow(clicked, setClicked, id, userData, isFollowing, setIsFollowig)}>unfollow</Button>
-                            : URL.id == userId ? null : <Button onClick={() => Follow(clicked, setClicked, id, userData, isFollowing, setIsFollowig,update,setUpdate)}>follow</Button>
-                        }
+                    <ConteinerFollow>
+                        <div className="name">
+                            {info.length !== 0 && <><img src={info.data.user.avatar} alt="" /><Title>{info.data.user.username}'s posts</Title></>}</div>
+
+                        <>
+                            {isFollowing
+                                ? <Button onClick={() => Follow(clicked, setClicked, id, userData, isFollowing, setIsFollowig)}>unfollow</Button>
+                                : URL.id == userId ? null : <Button onClick={() => Follow(clicked, setClicked, id, userData, isFollowing, setIsFollowig, update, setUpdate)}>follow</Button>
+                            }
                         </>
                     </ConteinerFollow>
 
                     {
-                        (posts.length === 0 && !load)?
+                        (posts.length === 0 && !load) ?
                             <h1>Loading...</h1> :
                             <InfiniteScroll
                                 dataLength={posts.data.posts.length}
                                 next={() => {
-                                    setPage(page+10)}}
-                                hasMore={posts.data.posts.length>(page+10) ? true : false}>
-                            <ul>{posts.data.posts.map(p => <Post post={p} key={p.id}/>)}</ul>
+                                    setPage(page + 10)
+                                }}
+                                hasMore={posts.data.posts.length > (page + 10) ? true : false}>
+                                <ul>{posts.data.posts.map(p => <Post post={p} key={p.id} />)}</ul>
                             </InfiniteScroll>
                     }
                 </div>
@@ -106,13 +107,13 @@ export default function UserPosts(props) {
 
 function Follow(clicked, setClicked, id, userData, isFollowing, setIsFollowig, update, setUpdate) {
 
-    if(clicked) return;
+    if (clicked) return;
     let request;
 
-    if(isFollowing) {
-        request = axios.post(`https://mock-api.bootcamp.respondeai.com.br/api/v1/linkr/users/${id}/unfollow`, id, {headers: {"User-Token": userData.token }});
+    if (isFollowing) {
+        request = axios.post(`https://mock-api.bootcamp.respondeai.com.br/api/v1/linkr/users/${id}/unfollow`, id, { headers: { "User-Token": userData.token } });
     } else {
-        request = axios.post(`https://mock-api.bootcamp.respondeai.com.br/api/v1/linkr/users/${id}/follow`, id,{headers: {"User-Token": userData.token }});
+        request = axios.post(`https://mock-api.bootcamp.respondeai.com.br/api/v1/linkr/users/${id}/follow`, id, { headers: { "User-Token": userData.token } });
     }
 
     request.then(() => {

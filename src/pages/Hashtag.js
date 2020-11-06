@@ -52,9 +52,10 @@ export default function Hashtag(props) {
                             <InfiniteScroll
                                 dataLength={posts.data.posts.length}
                                 next={() => {
-                                    setPage(page+10)}}
-                                hasMore={posts.data.posts.length > (page+10) ? true : false}>
-                            <ul>{posts.data.posts.map(p => <Post post={p} key={p.id}/>)}</ul>
+                                    setPage(page + 10)
+                                }}
+                                hasMore={posts.data.posts.length > (page + 10) ? true : false}>
+                                <ul>{posts.data.posts.map(p => <Post post={p} key={p.id} />)}</ul>
                             </InfiniteScroll>
                     }
                 </div>

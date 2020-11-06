@@ -15,7 +15,7 @@ export default function MyPosts() {
     const [load, setLoad] = useState(false);
     const { userInfo, update, setUpdate } = useContext(UserContext);
     const userData = userInfo.data;
-    
+
     if (userData === undefined) {
         window.location = "http://localhost:9000";
     }
@@ -50,9 +50,10 @@ export default function MyPosts() {
                             <InfiniteScroll
                                 dataLength={posts.data.posts.length}
                                 next={() => {
-                                    setPage(page+10)}}
-                                hasMore={posts.data.length>(page+10) ? true : false}>  
-                            <ul>{posts.data.posts.map(p => <Post post={p} key={p.id} />)}</ul>
+                                    setPage(page + 10)
+                                }}
+                                hasMore={posts.data.length > (page + 10) ? true : false}>
+                                <ul>{posts.data.posts.map(p => <Post post={p} key={p.id} />)}</ul>
                             </InfiniteScroll>
                     }
                 </div>

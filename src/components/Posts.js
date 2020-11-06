@@ -1,4 +1,4 @@
-import React, {useContext, useState} from 'react';
+import React, { useContext, useState } from 'react';
 import ReactModal from 'react-modal';
 import axios from "axios";
 import { FaRegTrashAlt, FaPencilAlt } from "react-icons/fa";
@@ -15,35 +15,35 @@ import { Snippet, PostSection, ModalContent } from '../styles/timeline';
 ReactModal.setAppElement('#root');
 
 export default function Post(props) {
-    const {post } = props;
-    const {userInfo, update, setUpdate } = useContext(UserContext);
+    const { post } = props;
+    const { userInfo, update, setUpdate } = useContext(UserContext);
     const userId = userInfo.data.user.id;
-    const {editing, setEditing, editClick, modified, textEdit, postId, setPostId} = useContext(EditContext);
+    const { editing, setEditing, editClick, modified, textEdit, postId, setPostId } = useContext(EditContext);
     const [clicked, setClicked] = useState(false);
     const [showModal, setShowModal] = useState(false);
-    
+
     let history = useHistory();
- 
-    function handleOpenModal () {
+
+    function handleOpenModal() {
         setShowModal(true);
     }
 
-    function handleCloseModal () {
+    function handleCloseModal() {
         setShowModal(false);
     }
 
-    function handleDeletion(deletePost){
+    function handleDeletion(deletePost) {
         if (clicked) return;
 
         const request = axios.delete(`https://mock-api.bootcamp.respondeai.com.br/api/v1/linkr/posts/${deletePost.id}`, { headers: { 'User-token': userInfo.data.token } })
-        
+
         setClicked(true);
-        
+
         request.then(() => {
             setShowModal(false);
             setUpdate(!update);
         })
-        
+
         request.catch(() => {
             setShowModal(false);
             setClicked(false);
@@ -51,11 +51,11 @@ export default function Post(props) {
         })
     }
 
-    function handleEdit(editPost){
-        if(editing){
+    function handleEdit(editPost) {
+        if (editing) {
             setEditing(false);
         }
-        else{
+        else {
             editClick();
             setPostId(editPost.id);
         }
@@ -72,18 +72,18 @@ export default function Post(props) {
     }
 
     const style = {
-        overlay: { 
+        overlay: {
             width: "100vw",
             heigth: "100vh",
             top: "0px",
             left: "0px",
             backgroundColor: "rgba(255, 255, 255, 0.85)"
         },
-        content: { 
+        content: {
             position: "fixed",
             top: "150px",
             left: "400px",
-            right:"400px",
+            right: "400px",
             bottom: "300px",
             border: "1px solid rgb(204, 204, 204)",
             backgroundColor: "#333",
@@ -97,14 +97,14 @@ export default function Post(props) {
             alignItems: "center",
             borderRadius: "30px",
             color: "#FFF",
-            h1:{
+            h1: {
                 color: "#FFF",
                 fontSize: "20px",
                 padding: "0px 50px",
                 textAlign: "center",
                 marginBottom: "15px",
             }
-         }
+        }
     };
 
     return (
@@ -112,26 +112,26 @@ export default function Post(props) {
             <img src={post.user.avatar} onClick={() => profile(post.user)} />
             <div className="post">
                 <div>
-                <ReactModal 
-                    isOpen={showModal}
-                    contentLabel="onRequestClose Example"
-                    onRequestClose={handleCloseModal}
-                    shouldCloseOnOverlayClick={false}
-                    style={style}>
-                    <ModalContent>
-                        <p>Tem certeza que deseja excluir essa publicação?</p>
-                        <div>
-                            <button onClick={handleCloseModal}>Não, voltar</button>
-                            <button onClick={() => handleDeletion(post)}>Sim, excluir</button>
-                        </div>
-                    </ModalContent>
-                </ReactModal>
+                    <ReactModal
+                        isOpen={showModal}
+                        contentLabel="onRequestClose Example"
+                        onRequestClose={handleCloseModal}
+                        shouldCloseOnOverlayClick={false}
+                        style={style}>
+                        <ModalContent>
+                            <p>Tem certeza que deseja excluir essa publicação?</p>
+                            <div>
+                                <button onClick={handleCloseModal}>Não, voltar</button>
+                                <button onClick={() => handleDeletion(post)}>Sim, excluir</button>
+                            </div>
+                        </ModalContent>
+                    </ReactModal>
                     <h2 onClick={() => profile(post.user)}>{post.user.username}</h2>
-                    {post.user.id === userId ? <><FaPencilAlt icon={FaPencilAlt} onClick={() => handleEdit(post)}/><FaRegTrashAlt icon={FaRegTrashAlt} onClick={handleOpenModal}/></> : ""}
+                    {post.user.id === userId ? <><FaPencilAlt icon={FaPencilAlt} onClick={() => handleEdit(post)} /><FaRegTrashAlt icon={FaRegTrashAlt} onClick={handleOpenModal} /></> : ""}
                 </div>
-                {editing && post.user.id === userId && postId === post.id ? 
-                    <Edit text={post.text}/> :
-                    modified && post.user.id === userId && postId === post.id ? 
+                {editing && post.user.id === userId && postId === post.id ?
+                    <Edit text={post.text} /> :
+                    modified && post.user.id === userId && postId === post.id ?
                         <p><ReactHashtag onHashtagClick={val => hashtagPage(val)}>
                             {textEdit}
                         </ReactHashtag></p> :
@@ -140,25 +140,25 @@ export default function Post(props) {
                         </ReactHashtag></p>
                 }
                 <Snippet onClick={() => window.open(post.link)}>
-                
-                {post.link.includes("youtube") ? (
-                <div className="youtube">
-                <PlayerContainer>
-                <YoutubePlayer url={post.link} controls={true} width={"100%"} />
-                <a href="">{post.link}</a>
-                </PlayerContainer> </div>
-            ) : (
-                <>
-                    <div>
-                        <h3>{post.linkTitle}</h3>
-                        <p>{post.linkDescription}</p>
-                        <a href="">{post.link}</a>
-                    </div>
-                    <img src={post.linkImage} /> </>
-                  
-            )}
-              </Snippet>
-                
+
+                    {post.link.includes("youtube") ? (
+                        <div className="youtube">
+                            <PlayerContainer>
+                                <YoutubePlayer url={post.link} controls={true} width={"100%"} />
+                                <a href="">{post.link}</a>
+                            </PlayerContainer> </div>
+                    ) : (
+                            <>
+                                <div>
+                                    <h3>{post.linkTitle}</h3>
+                                    <p>{post.linkDescription}</p>
+                                    <a href="">{post.link}</a>
+                                </div>
+                                <img src={post.linkImage} /> </>
+
+                        )}
+                </Snippet>
+
             </div>
         </PostSection>
     );

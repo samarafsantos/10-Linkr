@@ -3,7 +3,7 @@ import { BrowserRouter as Router } from "react-router-dom";
 
 import AnimationStyle from './Animation';
 import UserContext from '../contexts/UserContext';
-import {EditProvider} from '../contexts/EditContext';
+import { EditProvider } from '../contexts/EditContext';
 
 export default function App() {
     const [userInfo, setUserInfo] = useState({});
@@ -14,7 +14,7 @@ export default function App() {
         <UserContext.Provider value={{ userInfo, setUserInfo, update, setUpdate }}>
             <EditProvider>
                 <Router>
-                    <AnimationStyle />  
+                    <AnimationStyle />
                 </Router>
             </EditProvider>
         </UserContext.Provider>

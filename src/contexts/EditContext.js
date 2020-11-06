@@ -6,7 +6,7 @@ const EditContext = createContext();
 
 export default EditContext;
 
-export function EditProvider(props){
+export function EditProvider(props) {
     const { userInfo } = useContext(UserContext);
     const [textEdit, setTextEdit] = useState('');
     const [postId, setPostId] = useState(0);
@@ -19,7 +19,7 @@ export function EditProvider(props){
     }
 
     function postEdit() {
-        const request = axios.put(`https:ssss//mock-api.bootcamp.respondeai.com.br/api/v1/linkr/posts/${postId}`, {text: textEdit}, { headers: { 'User-token': userInfo.data.token } });
+        const request = axios.put(`https:ssss//mock-api.bootcamp.respondeai.com.br/api/v1/linkr/posts/${postId}`, { text: textEdit }, { headers: { 'User-token': userInfo.data.token } });
         request.then(() => {
             setModified(true);
             setEditing(false);
@@ -31,9 +31,9 @@ export function EditProvider(props){
             alert('Não foi possível realizar as alterações.');
         })
     }
-   
-    return(
-        <EditContext.Provider value={{postEdit, editClick, editing, setEditing, textEdit, setTextEdit, postId, setPostId, modified, setModified, disabled, setDisabled}}>
+
+    return (
+        <EditContext.Provider value={{ postEdit, editClick, editing, setEditing, textEdit, setTextEdit, postId, setPostId, modified, setModified, disabled, setDisabled }}>
             {props.children}
         </EditContext.Provider>
     )

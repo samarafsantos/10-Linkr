@@ -221,10 +221,12 @@ input {
     font-size: 16px;
 }
 
-& > div {
+.show-menu {
     display: flex;
     align-items: center;
+    cursor: pointer;
 }
+
 img {
     width:53px;
     height:53px;
@@ -241,8 +243,9 @@ svg {
 
 @media(max-width: 600px) {
     input {
-        width: 98vw;
-        z-index: 100;
+        width: 90vw;
+        margin-left: 5%;
+        z-index: -10;
     }
 }
 `;
@@ -374,6 +377,7 @@ export const UsersContainer = styled.div`
     }
 
     @media(max-width: 600px) {
-        width: 98vw;
+        width: 90vw;
+        margin-left: 5%;
     }
     `;

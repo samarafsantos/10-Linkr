@@ -52,8 +52,7 @@ export default function Header(props) {
             setSearchedUsers([...followed, ...unfollowed]);
         });
     }, [search]);
-
-    console.log(searchedUsers);
+    
     return (
         <>
             <HeaderContainer>
@@ -88,7 +87,7 @@ export default function Header(props) {
                     </UsersContainer>
                 </SearchContainer>
 
-                <div>
+                <div className="show-menu">
                     {isDroped
                         ? <BsChevronUp onClick={dropDownMenu} />
                         : <BsChevronDown onClick={dropDownMenu} />
@@ -140,9 +139,7 @@ const Menu = styled.div`
     }
     
     @media(max-width: 600px) {
-        input {
-            width: 98vw;
-            z-index: -10;
-        }
+        right: 0;
+        top: ${props=>props.isDroped?"103px":"-34px"};
     }
 `

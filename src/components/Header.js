@@ -75,8 +75,10 @@ export default function Header(props) {
                             ? searchedUsers.map((u, i) => (
                                 (u.isFollowingLoggedUser)
                                     ? <Link to={{ pathname:`/user/${u.id}`}} key={i}>
+                                        <SearchName>
                                         <img src={u.avatar} />
                                         <p>{u.username} <span>• following</span></p>
+                                        </SearchName>
                                     </Link>
                                     : <Link to={{ pathname:`/user/${u.id}`}} key={i}>
                                         <img src={u.avatar} />
@@ -137,3 +139,16 @@ const Menu = styled.div`
         cursor: pointer;
     }
 `
+const SearchName = styled.div`
+    display:flex;
+    align-items: center;
+    font-family: inherit;
+
+    p {
+        margin-left: 3px;
+    }
+    
+    span {
+        color: rgba(0, 0, 0, 0.4);
+    }
+    `

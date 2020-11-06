@@ -58,8 +58,8 @@ export default function UserPosts(props) {
             <Container>
                 <div>
                 <ConteinerFollow>
-                    <>
-                    {posts.length !== 0 && <Title>{posts.data.posts[0].user.username}'s posts</Title>} </>
+                    <div className="name">
+                    {posts.length !== 0 && <Title>{posts.data.posts[0].user.username}'s posts</Title>} </div>
                     <>
                     {isFollowing
                             ? <Button onClick={() => Follow(clicked, setClicked, id, userData, isFollowing, setIsFollowig)}>unfollow</Button>
@@ -115,6 +115,12 @@ const ConteinerFollow = styled.div`
     display: flex;
     justify-content: space-between;
     align-items: center;
+
+    .name {
+        @media (max-width: 600px) {
+            margin-top: 40px;       
+        }
+    }
 `
 
 const Button = styled.button`
@@ -126,7 +132,10 @@ const Button = styled.button`
     background: #1877F2;
     color: white;
     border-radius: 5px;
-    margin-top: 5px;
     outline: none;
     cursor: pointer;
+
+    @media (max-width: 600px) {
+        margin-top:40px;       
+    }
 `

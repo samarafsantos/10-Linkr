@@ -18,13 +18,19 @@ export const Container = styled.div`
         }
     }
 
+    .title {
+        @media (max-width: 600px) {
+                margin-top: 40px;       
+            }
+    }
+
     .trendings{
         background: #171717;
         width: 300px;
         height: fit-content;
         color: #FFF;
         border-radius: 10px;
-        margin-top: 80px;
+        margin-top: 90px;
         margin-left: 50px;
 
         h1{
@@ -53,7 +59,7 @@ export const Title = styled.h1`
     font-size: 40px;
 
     @media (max-width: 600px) {
-        margin-top: 40px;    
+        margin-top: 60px;    
     }
 `;
 
@@ -145,7 +151,7 @@ export const ModalContent = styled.div`
             cursor:pointer;
         }
     } 
-`; 
+`;
 
 
 export const Snippet = styled.div`
@@ -304,14 +310,19 @@ export const SearchContainer = styled.div`
         left: 66%;
     }
     input{
-        width: 480px;
+        width: 38vw;
         height: 40px;
         border: none;
         border-radius: 8px;
+
+        @media (max-width: 600px) {
+            width: 45vw;
+        }
     }
     input::placeholder{
         padding-left:10px;
     }
+    
 `;
 
 export const UsersContainer = styled.div`
@@ -324,6 +335,10 @@ export const UsersContainer = styled.div`
     top: 0px;
     left: 0;
     z-index: -1;
+
+    @media (max-width: 600px) {
+        width: 45vw;
+    }
     a {
         display: block;
         margin-bottom: 20px;

@@ -86,6 +86,7 @@ const HashtagSearch = styled.form `
         font-size: 19px;
         font-family: inherit;
         font-weight: 700;
+        margin-left: 15px;
     }
     
     input {

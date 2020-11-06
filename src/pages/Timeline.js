@@ -19,6 +19,7 @@ export default function Timeline() {
     const [noFollow, setNoFollow] = useState(false);
     const { userInfo, update, setUpdate } = useContext(UserContext);
     const userData = userInfo.data;
+    const Id = userInfo.data.user.id;
 
     if (userData === undefined) {
         window.location = "http://localhost:9000";
@@ -58,7 +59,7 @@ export default function Timeline() {
         <>
             <Header avatar={avatar} />
             <Container>
-                <div>
+                <div className="title">
                     <Title>timeline</Title>
                     <InputPost
                         userData={userData}

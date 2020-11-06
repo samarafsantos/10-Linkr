@@ -37,11 +37,11 @@ export default function Trendings() {
     function searchHashtag(event) {
         event.preventDefault();
 
-        if(search==='') {
+        if (search === '') {
             alert("Preencha o campo com um assunto");
         }
         else {
-            history.push({ pathname:`/hashtag/${search}`, state: search });
+            history.push({ pathname: `/hashtag/${search}`, state: search });
             setUpdate(!update);
         }
     }
@@ -50,14 +50,14 @@ export default function Trendings() {
             <Trending>
                 <h1>Trendings</h1>
                 <HashtagSearch onSubmit={searchHashtag}>
-                <span>#</span>
-                <input 
-                type="search"
-                placeholder="Assunto"
-                onChange={e => setSearch(e.target.value)}
-                value={search}
-                />
-            </HashtagSearch>
+                    <span>#</span>
+                    <input
+                        type="search"
+                        placeholder="Assunto"
+                        onChange={e => setSearch(e.target.value)}
+                        value={search}
+                    />
+                </HashtagSearch>
                 <ul>
                     {
                         trendings.length === 0 ?
@@ -72,12 +72,13 @@ export default function Trendings() {
 
 const Trending = styled.div`
 display: block;
+overflow: hidden;
 @media (max-width: 600px) {
     display: none;
 }
 `
 
-const HashtagSearch = styled.form `
+const HashtagSearch = styled.form`
     width: 100%;
     margin-bottom: 8px;
     span {

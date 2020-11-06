@@ -22,9 +22,9 @@ export default function Timeline() {
     }
 
     useEffect(() => {
-        const request = axios.get('https://mock-api.bootcamp.respondeai.com.br/api/v1/linkr/users/follows', {headers: {"User-Token": userData.token }});
-        request.then(response => setFollows(response.data.users.length));     
-    },[]);
+        const request = axios.get('https://mock-api.bootcamp.respondeai.com.br/api/v1/linkr/users/follows', { headers: { "User-Token": userData.token } });
+        request.then(response => setFollows(response.data.users.length));
+    }, []);
 
     useEffect(() => serverRequest(), []);
 
@@ -33,21 +33,21 @@ export default function Timeline() {
         return () => clearInterval(interval);
     }, [update, page]);
 
-    function serverRequest(){
+    function serverRequest() {
         let mounted = true;
-        const request = axios.get(`https://mock-api.bootcamp.respondeai.com.br/api/v1/linkr/following/posts?offset=${page}&limit=10`, {headers: {"User-Token": userData.token }});
-            request.then((response) => {
-                if (mounted) {
-                    let newPosts = [...posts, ...response.data.posts];
+        const request = axios.get(`https://mock-api.bootcamp.respondeai.com.br/api/v1/linkr/following/posts?offset=${page}&limit=10`, { headers: { "User-Token": userData.token } });
+        request.then((response) => {
+            if (mounted) {
+                let newPosts = [...posts, ...response.data.posts];
                 setPosts(newPosts);
-                setLoad (true);
-                }
-            })
-            request.catch(() => {
-                alert("Houve uma falha ao obter os posts, por favor atualize a página");
-                setLoad (false);
-            });
-            return () => mounted = false;
+                setLoad(true);
+            }
+        })
+        request.catch(() => {
+            alert("Houve uma falha ao obter os posts, por favor atualize a página");
+            setLoad(false);
+        });
+        return () => mounted = false;
     }
 
     const { avatar } = userData.user;
@@ -63,23 +63,23 @@ export default function Timeline() {
                         update={update}
                         setUpdate={setUpdate}
                     />
-                         {(posts.length === 0 && !load) ? 
-                            <h1 className="h1">Loading...</h1> : 
-                            ((posts.length === 0 && load && follows!==0) ? 
-                                (<h1 className="h1">Nenhum post encontrado</h1>) : 
-                                ((posts.length === 0 && load && follows===0) ? 
-                                    (<h1 className="h1">Você não segue ninguém ainda, procure por perfis na busca</h1>) : 
-                                        (<InfiniteScroll
-                                            dataLength={posts.length}
-                                            next={() => {
-                                                setPage(page+10);
-                                            }}
-                                            hasMore={posts.length>(page+10) ? true : false}>
-                                            <ul>{(posts.map(p => <Post post={p} key={p.id}/>))}</ul>
-                                        </InfiniteScroll>)
-                                    )
-                                )
-                            }
+                    {(posts.length === 0 && !load) ?
+                        <h1 className="h1">Loading...</h1> :
+                        ((posts.length === 0 && load && follows !== 0) ?
+                            (<h1 className="h1">Nenhum post encontrado</h1>) :
+                            ((posts.length === 0 && load && follows === 0) ?
+                                (<h1 className="h1">Você não segue ninguém ainda, procure por perfis na busca</h1>) :
+                                (<InfiniteScroll
+                                    dataLength={posts.length}
+                                    next={() => {
+                                        setPage(page + 10);
+                                    }}
+                                    hasMore={posts.length > (page + 10) ? true : false}>
+                                    <ul>{(posts.map(p => <Post post={p} key={p.id} />))}</ul>
+                                </InfiniteScroll>)
+                            )
+                        )
+                    }
                 </div>
                 <Trendings />
             </Container>
@@ -88,28 +88,3 @@ export default function Timeline() {
 }
 
 
-
-
-
-
-//                     {
-//                         noFollow === true ? 
-//                             <h1>Você não segue ninguém ainda, procure por perfis na busca</h1>:
-//                             load ?
-//                                 (<h1>Loading...</h1>) : 
-//                                     posts.length === 0 ? 
-//                                         <h1>"Nenhuma publicação encontrada"</h1> :
-//                                         <InfiniteScroll
-//                                             dataLength={posts.length}
-//                                             next={() => {
-//                                                 setPage(page+10)}}
-//                                             hasMore={true}>
-//                                             <ul>{posts.map(p => <Post post={p} />)}</ul>
-//                                         </InfiniteScroll>
-//                     }
-//                 </div>
-//                 <Trendings />
-//             </Container>
-//         </>
-//     );
-// }

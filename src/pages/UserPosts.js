@@ -118,7 +118,7 @@ const ConteinerFollow = styled.div`
 
     .name {
         @media (max-width: 600px) {
-            margin-top: 40px;       
+            margin-top: 80px;       
         }
     }
 `
@@ -136,6 +136,6 @@ const Button = styled.button`
     cursor: pointer;
 
     @media (max-width: 600px) {
-        margin-top:40px;       
+        margin-top:80px;       
     }
 `

@@ -20,7 +20,7 @@ export const Container = styled.div`
 
     .title {
         @media (max-width: 600px) {
-                margin-top: 40px;       
+                margin-top: 100px;       
             }
     }
 
@@ -201,7 +201,7 @@ justify-content:space-between;
 align-items:center;
 background:#151515;
 padding:5px 20px;
-z-index:1;
+z-index:100;
 h1 {
     font-family: 'Passion one', sans-serif;
     font-weight:bold;
@@ -211,6 +211,16 @@ h1 {
         cursor: pointer;
     }
 }
+
+input {
+    width: 38vw;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    outline-style: none;
+    font-size: 16px;
+}
+
 & > div {
     display: flex;
     align-items: center;
@@ -228,7 +238,15 @@ svg {
     cursor: pointer;
     font-size: 25px;
 }
-`
+
+@media(max-width: 600px) {
+    input {
+        width: 98vw;
+        z-index: 100;
+    }
+}
+`;
+
 
 export const InputContainer = styled.article`
 background: #FFF;
@@ -310,20 +328,17 @@ export const SearchContainer = styled.div`
         top: 19px;
         left: 66%;
     }
-    input{
-        width: 38vw;
-        height: 40px;
-        border: none;
-        border-radius: 8px;
-
-        @media (max-width: 600px) {
-            width: 45vw;
+    
+    @media(max-width: 600px) {
+        position: absolute;
+        top: 70px;
+        left: 1vw;
+        & > svg {
+            top: 76px;
+            left: 90%;
+            z-index: 100;
         }
     }
-    input::placeholder{
-        padding-left:10px;
-    }
-    
 `;
 
 export const UsersContainer = styled.div`
@@ -337,15 +352,28 @@ export const UsersContainer = styled.div`
     left: 0;
     z-index: -1;
 
-    @media (max-width: 600px) {
-        width: 45vw;
-    }
     a {
         display: block;
         margin-bottom: 20px;
-        z-index: 10;
+        z-index: 9;
     }
-    img{
-        margin-top:10px;
+
+    img, p span {
+        display: inline-block;
+        padding: 10px;
     }
-    `
+    
+    p {
+        margin-top: -38px;
+        margin-left: 55px;
+        font-weight: 300;
+    }
+    span {
+        margin-top: -48px;
+        color: #828282;
+    }
+
+    @media(max-width: 600px) {
+        width: 98vw;
+    }
+    `;

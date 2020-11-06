@@ -75,10 +75,8 @@ export default function Header(props) {
                             ? searchedUsers.map((u, i) => (
                                 (u.isFollowingLoggedUser)
                                     ? <Link to={{ pathname:`/user/${u.id}`}} key={i}>
-                                        <SearchName>
                                         <img src={u.avatar} />
                                         <p>{u.username} <span>• following</span></p>
-                                        </SearchName>
                                     </Link>
                                     : <Link to={{ pathname:`/user/${u.id}`}} key={i}>
                                         <img src={u.avatar} />
@@ -114,13 +112,15 @@ const Menu = styled.div`
     background: #171717;
     right: 0;
     top: ${props => props.isDroped ? "63px" : "-34px"};
-    transition: top 1s ease-in-out;
+    transition: top .5s ease-in-out;
     display:flex;
     flex-direction:column;
     align-items:center;
     padding: 17px;
     color:white;
     border-radius: 0px 0px 0px 20px;
+    z-index:10;
+
     a {
         color:inherit;
         display:block;
@@ -138,17 +138,11 @@ const Menu = styled.div`
         margin-top: 2px;
         cursor: pointer;
     }
-`
-const SearchName = styled.div`
-    display:flex;
-    align-items: center;
-    font-family: inherit;
-
-    p {
-        margin-left: 3px;
-    }
     
-    span {
-        color: rgba(0, 0, 0, 0.4);
+    @media(max-width: 600px) {
+        input {
+            width: 98vw;
+            z-index: -10;
+        }
     }
-    `
+`

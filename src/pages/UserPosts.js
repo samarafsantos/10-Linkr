@@ -11,9 +11,9 @@ import UserContext from '../contexts/UserContext';
 export default function UserPosts(props) {
     let URL = props.match.params;
     const [page, setPage] = useState(0);
-    const [hasMore, setHasMore] = useState(10);
-    const [load, setLoad] = useState(false)
+    const [load, setLoad] = useState(false);
     const [posts, setPosts] = useState([]);
+    const [info, setInfo] = useState([]);
     const { userInfo, update, setUpdate } = useContext(UserContext);
     const userData = userInfo.data;
     const [isFollowing, setIsFollowig] = useState(false);
@@ -22,10 +22,24 @@ export default function UserPosts(props) {
 
     if (userData === undefined) {
         window.location = "http://localhost:9000";
-    } 
+    }
 
     useEffect(() => {
-        const request = axios.get(`https://mock-api.bootcamp.respondeai.com.br/api/v1/linkr/users/${URL.id}/posts?offset=${page}&limit=${hasMore}`, { headers: { 'User-token': userInfo.data.token } });
+        const request = axios.get(`https://mock-api.bootcamp.respondeai.com.br/api/v1/linkr/users/${URL.id}`, { headers: { 'User-token': userInfo.data.token } });
+        request.then((response) => {
+            if (response.length === 0) {
+                alert("Nenhum post encontrado");
+                return;
+            }
+            setInfo(response);           
+        })
+        request.catch(() => {
+            alert("Houve uma falha ao obter os posts, por favor atualize a página");
+        })
+    }, []);
+
+    useEffect(() => {
+        const request = axios.get(`https://mock-api.bootcamp.respondeai.com.br/api/v1/linkr/users/${URL.id}/posts?offset=${page}&limit=10`, { headers: { 'User-token': userInfo.data.token } });
         request.then((response) => {
             if (response.length === 0) {
                 alert("Nenhum post encontrado");
@@ -36,7 +50,7 @@ export default function UserPosts(props) {
         request.catch(() => {
             alert("Houve uma falha ao obter os posts, por favor atualize a página");
         })
-    }, [update, page, hasMore]);
+    }, [update, page]);
 
     useEffect(() => {
         const request = axios.get('https://mock-api.bootcamp.respondeai.com.br/api/v1/linkr/users/follows', {headers: {"User-Token": userData.token }});
@@ -59,7 +73,8 @@ export default function UserPosts(props) {
                 <div>
                 <ConteinerFollow>
                     <div className="name">
-                    {posts.length !== 0 && <Title>{posts.data.posts[0].user.username}'s posts</Title>} </div>
+                    {info.length !== 0 && <><img src={info.data.user.avatar} alt="" /><Title>{info.data.user.username}'s posts</Title></>}</div>
+                    
                     <>
                     {isFollowing
                             ? <Button onClick={() => Follow(clicked, setClicked, id, userData, isFollowing, setIsFollowig)}>unfollow</Button>
@@ -74,9 +89,8 @@ export default function UserPosts(props) {
                             <InfiniteScroll
                                 dataLength={posts.data.posts.length}
                                 next={() => {
-                                    setPage(page+1);
-                                    setHasMore(hasMore+1)}}
-                                hasMore={posts.data.posts.length < hasMore ? false : true}>
+                                    setPage(page+10)}}
+                                hasMore={true}>
                             <ul>{posts.data.posts.map(p => <Post post={p} key={p.id}/>)}</ul>
                             </InfiniteScroll>
                     }
@@ -117,6 +131,15 @@ const ConteinerFollow = styled.div`
     align-items: center;
 
     .name {
+        display: flex;
+        align-items: center;
+        img{
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            margin: 15px;
+            flex-shrink:0;
+        }
         @media (max-width: 600px) {
             margin-top: 80px;       
         }

@@ -13,7 +13,7 @@ export default function MyLikes() {
     const [posts, setPosts] = useState([]);
     const [page, setPage] = useState(0);
     const [load, setLoad] = useState(false);
-    const { userInfo, update, setUpdate } = useContext(UserContext);
+    const { userInfo } = useContext(UserContext);
     const userData = userInfo.data;
 
     if (userData === undefined) {
@@ -34,10 +34,10 @@ export default function MyLikes() {
             alert("Houve uma falha ao obter os posts, por favor atualize a página");
             setLoad(false);
         })
-    }, [update, page]);
+    }, [page]);
 
     const { avatar } = userData.user;
-    console.log(posts);
+
     return (
         <>
             <Header avatar={avatar} />

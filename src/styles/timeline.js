@@ -12,7 +12,7 @@ export const Container = styled.div`
     }
 
     & > div{
-        h1{
+        .h1{
             margin: 15px;
             color: #FFF;
         }

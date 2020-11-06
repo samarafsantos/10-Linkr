@@ -12,8 +12,7 @@ import UserContext from '../contexts/UserContext';
 export default function MyPosts() {
     const [posts, setPosts] = useState([]);
     const [page, setPage] = useState(0);
-    const [hasMore, setHasMore] = useState(10);
-    const [load, setLoad] = useState(false)
+    const [load, setLoad] = useState(false);
     const { userInfo, update, setUpdate } = useContext(UserContext);
     const userData = userInfo.data;
     
@@ -22,7 +21,7 @@ export default function MyPosts() {
     }
 
     useEffect(() => {
-        const request = axios.get(`https://mock-api.bootcamp.respondeai.com.br/api/v1/linkr/users/${userData.user.id}/posts?offset=${page}&limit=${hasMore}`, { headers: { 'User-token': userInfo.data.token } });
+        const request = axios.get(`https://mock-api.bootcamp.respondeai.com.br/api/v1/linkr/users/${userData.user.id}/posts?offset=${page}&limit=10`, { headers: { 'User-token': userInfo.data.token } });
         request.then((response) => {
             if (response.length === 0) {
                 alert("Nenhum post encontrado");
@@ -33,11 +32,12 @@ export default function MyPosts() {
         })
         request.catch(() => {
             alert("Houve uma falha ao obter os posts, por favor atualize a página");
+            setLoad(false);
         })
-    }, [update, page, hasMore]);
+    }, [update, page]);
 
     const { avatar } = userData.user;
-
+    console.log(posts);
     return (
         <>
             <Header avatar={avatar} />
@@ -45,15 +45,14 @@ export default function MyPosts() {
                 <div>
                     <Title>My posts</Title>
                     {
-                        posts.length === 0 ?
+                        (posts.length === 0 && !load) ?
                             <h1>Loading...</h1> :
                             <InfiniteScroll
                                 dataLength={posts.data.posts.length}
                                 next={() => {
-                                    setPage(page+1);
-                                    setHasMore(hasMore+1)}}
-                                hasMore={posts.data.posts.length < hasMore ? false : true}>  
-                            <ul>{posts.data.posts.map(p => <Post post={p} />)}</ul>
+                                    setPage(page+10)}}
+                                hasMore={posts.data.length>(page+10) ? true : false}>  
+                            <ul>{posts.data.posts.map(p => <Post post={p} key={p.id} />)}</ul>
                             </InfiniteScroll>
                     }
                 </div>

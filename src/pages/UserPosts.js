@@ -31,10 +31,11 @@ export default function UserPosts(props) {
                 alert("Nenhum post encontrado");
                 return;
             }
-            setInfo(response);           
+            setInfo(response);         
         })
         request.catch(() => {
             alert("Houve uma falha ao obter os posts, por favor atualize a página");
+            
         })
     }, []);
 
@@ -45,10 +46,12 @@ export default function UserPosts(props) {
                 alert("Nenhum post encontrado");
                 return;
             }
-            setPosts(response);           
+            setPosts(response); 
+            setLoad(true);            
         })
         request.catch(() => {
             alert("Houve uma falha ao obter os posts, por favor atualize a página");
+            setLoad(false);  
         })
     }, [update, page]);
 
@@ -84,13 +87,13 @@ export default function UserPosts(props) {
                     </ConteinerFollow>
 
                     {
-                        posts.length === 0 ?
+                        (posts.length === 0 && !load)?
                             <h1>Loading...</h1> :
                             <InfiniteScroll
                                 dataLength={posts.data.posts.length}
                                 next={() => {
                                     setPage(page+10)}}
-                                hasMore={true}>
+                                hasMore={posts.data.posts.length>(page+10) ? true : false}>
                             <ul>{posts.data.posts.map(p => <Post post={p} key={p.id}/>)}</ul>
                             </InfiniteScroll>
                     }

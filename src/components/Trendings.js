@@ -30,9 +30,7 @@ export default function Trendings() {
         })
     }, [update]);
 
-    function HashtagPage(val) {
-        console.log(val);
-
+    function hashtagPage(val) {
         history.push("/hashtag/" + val.name);
     }
 
@@ -64,7 +62,7 @@ export default function Trendings() {
                     {
                         trendings.length === 0 ?
                             <h1>Loading...</h1> :
-                            trendings.data.hashtags.map((h) => <li key={h.id} onClick={() => HashtagPage(h)}># {h.name}</li>)
+                            trendings.data.hashtags.map((h) => <li key={h.id} onClick={() => hashtagPage(h)}># {h.name}</li>)
                     }
                 </ul>
             </Trending>

@@ -12,7 +12,6 @@ export default function Timeline() {
 
     const [posts, setPosts] = useState([]);
     const [page, setPage] = useState(0);
-    const [hasMore, setHasMore] = useState(10);
     const [load, setLoad] = useState(false);
     const [follows, setFollows] = useState(false);
     const { userInfo, update, setUpdate } = useContext(UserContext);
@@ -32,7 +31,7 @@ export default function Timeline() {
     useEffect(() => {
         const interval = setInterval(() => serverRequest(), 15000);
         return () => clearInterval(interval);
-    }, [update, page, hasMore]);
+    }, [update, page]);
 
     function serverRequest(){
         let mounted = true;
@@ -44,7 +43,10 @@ export default function Timeline() {
                 setLoad (true);
                 }
             })
-            request.catch(() => alert("Houve uma falha ao obter os posts, por favor atualize a página"));
+            request.catch(() => {
+                alert("Houve uma falha ao obter os posts, por favor atualize a página");
+                setLoad (false);
+            });
             return () => mounted = false;
     }
 
@@ -62,17 +64,17 @@ export default function Timeline() {
                         setUpdate={setUpdate}
                     />
                          {(posts.length === 0 && !load) ? 
-                            <h1>Loading...</h1> : 
+                            <h1 className="h1">Loading...</h1> : 
                             ((posts.length === 0 && load && follows!==0) ? 
-                                (<h1>Nenhum post encontrado</h1>) : 
+                                (<h1 className="h1">Nenhum post encontrado</h1>) : 
                                 ((posts.length === 0 && load && follows===0) ? 
-                                    (<h1>Você não segue ninguém ainda, procure por perfis na busca</h1>) : 
+                                    (<h1 className="h1">Você não segue ninguém ainda, procure por perfis na busca</h1>) : 
                                         (<InfiniteScroll
                                             dataLength={posts.length}
                                             next={() => {
                                                 setPage(page+10);
                                             }}
-                                            hasMore={true}>
+                                            hasMore={posts.length>(page+10) ? true : false}>
                                             <ul>{(posts.map(p => <Post post={p} key={p.id}/>))}</ul>
                                         </InfiniteScroll>)
                                     )

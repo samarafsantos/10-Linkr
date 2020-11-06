@@ -1,4 +1,4 @@
-import React, {useContext, useState, useEffect} from 'react';
+import React, {useContext, useState} from 'react';
 import ReactModal from 'react-modal';
 import axios from "axios";
 import { FaRegTrashAlt, FaPencilAlt } from "react-icons/fa";
@@ -27,9 +27,11 @@ export default function Post(props) {
     function handleOpenModal () {
         setShowModal(true);
     }
+
     function handleCloseModal () {
         setShowModal(false);
     }
+
     function handleDeletion(deletePost){
         if (clicked) return;
 
@@ -106,7 +108,6 @@ export default function Post(props) {
     };
 
     return (
-        <>
         <PostSection>
             <img src={post.user.avatar} onClick={() => profile(post.user)} />
             <div className="post">
@@ -160,7 +161,6 @@ export default function Post(props) {
                 
             </div>
         </PostSection>
-    </>
     );
 }
 

@@ -73,16 +73,29 @@ export const PostSection = styled.div`
     @media (max-width: 600px) {
         width: 100%;
     }
-
-    & > img{
+    
+    .likes{
+        & > img{
         width: 50px;
         height: 50px;
         border-radius: 50%;
         margin: 15px;
         flex-shrink:0;
-        &:hover{
-            cursor: pointer;
+            &:hover{
+                cursor: pointer;
+            }
         }
+        & > div{
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            svg{
+                font-size: 25px;
+            }
+        }
+        display: flex;
+        flex-direction:column;
+        align-items:center;
     }
     .post{
         width: 90%;

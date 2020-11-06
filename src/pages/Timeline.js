@@ -51,7 +51,7 @@ export default function Timeline() {
     }
 
     const { avatar } = userData.user;
-
+    console.log(posts);
     return (
         <>
             <Header avatar={avatar} />

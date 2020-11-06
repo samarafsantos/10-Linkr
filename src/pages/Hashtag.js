@@ -37,8 +37,7 @@ export default function Hashtag(props) {
             setLoad(false);
         })
     }, [update, page]);
-    console.log(posts);
-    console.log(page);
+    
     const { avatar } = userData.user;
     return (
         <>

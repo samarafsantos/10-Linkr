@@ -1,12 +1,20 @@
-import React, {useContext, useState} from 'react';
+import React, {useContext, useState, useEffect} from 'react';
 import ReactModal from 'react-modal';
+import ReactTooltip from 'react-tooltip';
 import axios from "axios";
-import { FaRegTrashAlt, FaPencilAlt } from "react-icons/fa";
+
 import ReactHashtag from "react-hashtag";
 import { useHistory } from "react-router-dom";
+import ReactPlayer from 'react-player'
+
+
+import { FaRegTrashAlt, FaPencilAlt } from "react-icons/fa";
+import { FcLike } from "react-icons/fc";
+import { AiOutlineHeart } from "react-icons/ai";
+
 import UserContext from '../contexts/UserContext';
 import EditContext from '../contexts/EditContext';
-import ReactPlayer from 'react-player'
+
 import styled from 'styled-components';
 import Edit from '../components/Edit';
 
@@ -15,12 +23,49 @@ import { Snippet, PostSection, ModalContent } from '../styles/timeline';
 ReactModal.setAppElement('#root');
 
 export default function Post(props) {
-    const {post } = props;
+    const {post} = props;
     const {userInfo, update, setUpdate } = useContext(UserContext);
     const userId = userInfo.data.user.id;
     const {editing, setEditing, editClick, modified, textEdit, postId, setPostId} = useContext(EditContext);
     const [clicked, setClicked] = useState(false);
     const [showModal, setShowModal] = useState(false);
+    const [like,setLike] = useState(false);
+    const [likeMessage, setLikeMessage] = useState("");
+    const [numLikes, setNumLikes] = useState(post.likes.length);
+
+    useEffect(() => {
+        setLike(post.likes.some(like => like.userId === userId));
+    },[]);
+
+    useEffect(() => {
+        let text = "";
+        if (like) {
+            switch (numLikes){
+                case 1: text = "Você";
+                        break;
+                case 2: text = "Você e "+post.likes[0]['user.username'];
+                        break;
+                case 3: text = "Você, "+post.likes[0]['user.username']+" e "+(numLikes - 2)+" pessoa";
+                        break;
+                default: text = "Você, "+post.likes[0]['user.username']+" e "+(numLikes - 2)+" pessoas";
+            }
+        }else{
+            switch (numLikes){
+                case 0: text = "0 curtidas";
+                        break;
+                case 1: text = post.likes[0]['user.username'];
+                        break;
+                case 2: text = post.likes[0]['user.username']+" e "+(numLikes - 1)+" pessoa";
+                        break;
+                default: text = post.likes[0]['user.username']+" e "+(numLikes - 1)+" pessoas";
+            }
+        }
+        setLikeMessage(text);
+    },[numLikes, like]);
+
+    useEffect(() => {
+        ReactTooltip.rebuild();
+    },[like]);
     
     let history = useHistory();
  
@@ -30,6 +75,21 @@ export default function Post(props) {
 
     function handleCloseModal () {
         setShowModal(false);
+    }
+
+    function likePost(likePost){
+        const request = axios.post("https://mock-api.bootcamp.respondeai.com.br/api/v1/linkr/posts/"+likePost.id+"/like",{},{ headers: { 'User-token': userInfo.data.token } });
+        request.then(() => {
+            setLike(true);
+            setNumLikes(numLikes+1);
+        });
+    }
+    function dislikePost(dislikePost){
+        const request = axios.post("https://mock-api.bootcamp.respondeai.com.br/api/v1/linkr/posts/"+dislikePost.id+"/dislike",{},{ headers: { 'User-token': userInfo.data.token } });
+        request.then(() => {
+            setLike(false);
+            setNumLikes(numLikes-1);
+        });
     }
 
     function handleDeletion(deletePost){
@@ -109,7 +169,16 @@ export default function Post(props) {
 
     return (
         <PostSection>
-            <img src={post.user.avatar} onClick={() => profile(post.user)} />
+            <div className="likes">
+                <img src={post.user.avatar} onClick={() => profile(post.user)} />
+                <div>
+                    {like ? 
+                        <FcLike data-tip={likeMessage} onClick={()=>dislikePost(post)} className="icon"/> : 
+                        <AiOutlineHeart data-tip={likeMessage} onClick={()=>likePost(post)} className="icon" />}
+                        <ReactTooltip />
+                        {numLikes === 1 ? <p>{numLikes} like</p> : <p>{numLikes} likes</p>}
+                </div>
+            </div>
             <div className="post">
                 <div>
                 <ReactModal 

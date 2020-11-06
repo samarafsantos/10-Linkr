@@ -52,7 +52,7 @@ export default function Login() {
                     value={password}
                     placeholder='password'
                 />
-                <button type='submit'>Log In</button>
+                <button type='submit' disabled={clicked} >Log In</button>
                 <Link to='/SignUp'>First time? Create an account!</Link>
             </LoginInfo>
         </Container>

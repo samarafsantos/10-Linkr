@@ -302,6 +302,7 @@ button {
 
 export const SearchContainer = styled.div`
     position: relative;
+
     & > svg {
         color: #adaaaa;
         cursor: auto;

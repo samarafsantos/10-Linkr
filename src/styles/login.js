@@ -54,6 +54,12 @@ export const LoginInfo = styled.form`
         color: #FFF;
         margin-bottom: 20px;
     }
+
+    button:hover {
+        background-color: #EFEFEF;
+        color: black;
+    }
+
     a {
         text-decoration: underline;
         font-size: 14px;

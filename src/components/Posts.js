@@ -34,7 +34,7 @@ export default function Post(props) {
     const [numLikes, setNumLikes] = useState(post.likes.length);
 
     useEffect(() => {
-        setLike(post.likes.some(like => (like.userId === userId || like.id === userId)));
+        setLike(post.likes.some(like => like.userId === userId));
     },[]);
 
     useEffect(() => {
@@ -130,43 +130,6 @@ export default function Post(props) {
         const hash = val.split('#');
         history.push("/hashtag/" + hash[1]);
     }
-
-    const style = {
-        overlay: {
-            width: "100vw",
-            heigth: "100vh",
-            top: "0px",
-            left: "0px",
-            backgroundColor: "rgba(255, 255, 255, 0.85)"
-        },
-        content: {
-            position: "fixed",
-            top: "150px",
-            left: "400px",
-            right: "400px",
-            bottom: "300px",
-            border: "1px solid rgb(204, 204, 204)",
-            backgroundColor: "#333",
-            overflow: "auto",
-            borderRadius: "4px",
-            outline: "none",
-            padding: "20px",
-            display: "flex",
-            flexDirection: "column",
-            justifyContent: "center",
-            alignItems: "center",
-            borderRadius: "30px",
-            color: "#FFF",
-            h1: {
-                color: "#FFF",
-                fontSize: "20px",
-                padding: "0px 50px",
-                textAlign: "center",
-                marginBottom: "15px",
-            }
-        }
-    };
-    console.log(like);
     return (
         <PostSection>
             <div className="likes">
@@ -233,6 +196,42 @@ export default function Post(props) {
     );
 }
 
+
+const style = {
+    overlay: {
+        width: "100vw",
+        heigth: "100vh",
+        top: "0px",
+        left: "0px",
+        backgroundColor: "rgba(255, 255, 255, 0.85)"
+    },
+    content: {
+        position: "fixed",
+        top: "150px",
+        left: "400px",
+        right: "400px",
+        bottom: "300px",
+        border: "1px solid rgb(204, 204, 204)",
+        backgroundColor: "#333",
+        overflow: "auto",
+        borderRadius: "4px",
+        outline: "none",
+        padding: "20px",
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "center",
+        alignItems: "center",
+        borderRadius: "30px",
+        color: "#FFF",
+        h1: {
+            color: "#FFF",
+            fontSize: "20px",
+            padding: "0px 50px",
+            textAlign: "center",
+            marginBottom: "15px",
+        }
+    }
+};
 
 
 const PlayerContainer = styled.div`

@@ -37,13 +37,14 @@ export default function MyLikes() {
     }, [update, page]);
 
     const { avatar } = userData.user;
-    console.log(posts);
     return (
         <>
             <Header avatar={avatar} />
             <Container>
-                <div>
+                <div className="title">
                     <Title>My likes</Title>
+                    <div className="like">
+
                     {
                         (posts.length === 0 && !load) ?
                             <h1>Loading...</h1> :
@@ -56,6 +57,7 @@ export default function MyLikes() {
                                 <ul>{posts.data.posts.map(p => <Post post={p} key={p.id} />)}</ul>
                             </InfiniteScroll>
                     }
+                    </div>
                 </div>
                 <Trendings />
             </Container>

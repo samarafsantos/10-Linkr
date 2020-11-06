@@ -24,6 +24,10 @@ export const Container = styled.div`
             }
     }
 
+    .like {
+        margin-top: 40px;
+    }
+
     .trendings{
         background: #171717;
         width: 300px;

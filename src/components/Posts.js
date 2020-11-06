@@ -34,7 +34,7 @@ export default function Post(props) {
     const [numLikes, setNumLikes] = useState(post.likes.length);
 
     useEffect(() => {
-        setLike(post.likes.some(like => like.userId === userId));
+        setLike(post.likes.some(like => (like.userId === userId || like.id === userId)));
     },[]);
 
     useEffect(() => {

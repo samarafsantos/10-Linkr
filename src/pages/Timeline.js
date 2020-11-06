@@ -19,7 +19,6 @@ export default function Timeline() {
     const [noFollow, setNoFollow] = useState(false);
     const { userInfo, update, setUpdate } = useContext(UserContext);
     const userData = userInfo.data;
-    const Id = userInfo.data.user.id;
 
     if (userData === undefined) {
         window.location = "http://localhost:9000";

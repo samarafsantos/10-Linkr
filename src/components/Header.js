@@ -97,7 +97,7 @@ export default function Header(props) {
             </HeaderContainer>
             <Menu isDroped={isDroped}>
                 <Link to="/MyPosts">My posts</Link>
-                <Link to="">My likes</Link>
+                <Link to="/MyLikes">My likes</Link>
                 <button onClick={logout}>Logout</button>
             </Menu>
         </>

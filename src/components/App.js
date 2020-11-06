@@ -9,7 +9,6 @@ export default function App() {
     const [userInfo, setUserInfo] = useState({});
     const [update, setUpdate] = useState(false)
 
-
     return (
         <UserContext.Provider value={{ userInfo, setUserInfo, update, setUpdate }}>
             <EditProvider>

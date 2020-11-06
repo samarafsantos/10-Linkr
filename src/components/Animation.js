@@ -9,6 +9,7 @@ import Timeline from '../pages/Timeline';
 import MyPosts from '../pages/MyPosts';
 import UserPosts from '../pages/UserPosts';
 import Hashtag from '../pages/Hashtag';
+import MyLikes from '../pages/MyLikes';
 
 function AnimationStyle({ location }) {
 
@@ -22,12 +23,13 @@ function AnimationStyle({ location }) {
                 >
                     <section className='route-section'>
                         <Switch location={location}>
-                        <Route path="/hashtag/:hashtag" component={Hashtag} exact />
-                        <Route path="/user/:id" component={UserPosts} exact />
-                        <Route path="/MyPosts" component={MyPosts} exact />
-                        <Route path="/Timeline" component={Timeline} exact />
-                        <Route path="/Signup" component={SignUp} exact />
-                        <Route path="/" component={Login} exact />
+                        <   Route path="/MyLikes" component={MyLikes} exact />
+                            <Route path="/hashtag/:hashtag" component={Hashtag} exact />
+                            <Route path="/user/:id" component={UserPosts} exact />
+                            <Route path="/MyPosts" component={MyPosts} exact />
+                            <Route path="/Timeline" component={Timeline} exact />
+                            <Route path="/Signup" component={SignUp} exact />
+                            <Route path="/" component={Login} exact />
                         </Switch>
                     </section>
                 </CSSTransition>

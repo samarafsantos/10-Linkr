@@ -30,20 +30,18 @@ export default function Trendings() {
         })
     }, [update]);
 
-    function HashtagPage(val) {
-        console.log(val);
-
+    function hashtagPage(val) {
         history.push("/hashtag/" + val.name);
     }
 
     function searchHashtag(event) {
         event.preventDefault();
 
-        if(search==='') {
+        if (search === '') {
             alert("Preencha o campo com um assunto");
         }
         else {
-            history.push({ pathname:`/hashtag/${search}`, state: search });
+            history.push({ pathname: `/hashtag/${search}`, state: search });
             setUpdate(!update);
         }
     }
@@ -52,19 +50,19 @@ export default function Trendings() {
             <Trending>
                 <h1>Trendings</h1>
                 <HashtagSearch onSubmit={searchHashtag}>
-                <span>#</span>
-                <input 
-                type="search"
-                placeholder="Assunto"
-                onChange={e => setSearch(e.target.value)}
-                value={search}
-                />
-            </HashtagSearch>
+                    <span>#</span>
+                    <input
+                        type="search"
+                        placeholder="Assunto"
+                        onChange={e => setSearch(e.target.value)}
+                        value={search}
+                    />
+                </HashtagSearch>
                 <ul>
                     {
                         trendings.length === 0 ?
                             <h1>Loading...</h1> :
-                            trendings.data.hashtags.map((h) => <li key={h.id} onClick={() => HashtagPage(h)}># {h.name}</li>)
+                            trendings.data.hashtags.map((h) => <li key={h.id} onClick={() => hashtagPage(h)}># {h.name}</li>)
                     }
                 </ul>
             </Trending>
@@ -74,18 +72,20 @@ export default function Trendings() {
 
 const Trending = styled.div`
 display: block;
+overflow: hidden;
 @media (max-width: 600px) {
     display: none;
 }
 `
 
-const HashtagSearch = styled.form `
+const HashtagSearch = styled.form`
     width: 100%;
     margin-bottom: 8px;
     span {
         font-size: 19px;
         font-family: inherit;
         font-weight: 700;
+        margin-left: 15px;
     }
     
     input {

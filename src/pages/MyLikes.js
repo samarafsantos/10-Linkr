@@ -9,11 +9,11 @@ import { Container, Title } from '../styles/timeline';
 
 import UserContext from '../contexts/UserContext';
 
-export default function MyPosts() {
+export default function MyLikes() {
     const [posts, setPosts] = useState([]);
     const [page, setPage] = useState(0);
     const [load, setLoad] = useState(false);
-    const { userInfo, update, setUpdate } = useContext(UserContext);
+    const { userInfo } = useContext(UserContext);
     const userData = userInfo.data;
 
     if (userData === undefined) {
@@ -21,7 +21,7 @@ export default function MyPosts() {
     }
 
     useEffect(() => {
-        const request = axios.get(`https://mock-api.bootcamp.respondeai.com.br/api/v1/linkr/users/${userData.user.id}/posts?offset=${page}&limit=10`, { headers: { 'User-token': userInfo.data.token } });
+        const request = axios.get(`https://mock-api.bootcamp.respondeai.com.br/api/v1/linkr/posts/liked`, { headers: { "User-Token": userData.token } });
         request.then((response) => {
             if (response.length === 0) {
                 alert("Nenhum post encontrado");
@@ -34,16 +34,18 @@ export default function MyPosts() {
             alert("Houve uma falha ao obter os posts, por favor atualize a página");
             setLoad(false);
         })
-    }, [update, page]);
+    }, [page]);
 
     const { avatar } = userData.user;
+    
     return (
         <>
             <Header avatar={avatar} />
             <Container>
                 <div className="title">
-                    <Title>My posts</Title>
+                    <Title>My likes</Title>
                     <div className="like">
+
                     {
                         (posts.length === 0 && !load) ?
                             <h1>Loading...</h1> :

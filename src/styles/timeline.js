@@ -11,13 +11,30 @@ export const Container = styled.div`
         padding: 5%;
     }
 
+    & > div{
+        .h1{
+            margin: 15px;
+            color: #FFF;
+        }
+    }
+
+    .title {
+        @media (max-width: 600px) {
+                margin-top: 100px;       
+            }
+    }
+
+    .like {
+        margin-top: 40px;
+    }
+
     .trendings{
         background: #171717;
         width: 300px;
         height: fit-content;
         color: #FFF;
         border-radius: 10px;
-        margin-top: 80px;
+        margin-top: 120px;
         margin-left: 50px;
 
         h1{
@@ -44,15 +61,14 @@ export const Title = styled.h1`
     font-weight: bold;
     font-family: 'Oswald', sans-serif;
     font-size: 40px;
-    margin-bottom: 40px;
 
     @media (max-width: 600px) {
-        margin-top: 40px;    
+        margin-top: 60px;    
     }
 `;
 
 export const PostSection = styled.div`
-    margin-top: 20px;
+    margin-top: 40px;
     background: #171717;
     width: 700px;
     display: flex;
@@ -61,22 +77,47 @@ export const PostSection = styled.div`
     @media (max-width: 600px) {
         width: 100%;
     }
-
-    & > img{
+    
+    .likes{
+        & > img{
         width: 50px;
         height: 50px;
         border-radius: 50%;
         margin: 15px;
         flex-shrink:0;
-        &:hover{
-            cursor: pointer;
+            &:hover{
+                cursor: pointer;
+            }
         }
+        & > div{
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            svg{
+                font-size: 25px;
+            }
+        }
+        display: flex;
+        flex-direction:column;
+        align-items:center;
     }
     .post{
-        width: 80%;
+        width: 90%;
         padding: 15px;
+        & > div{
+            display: flex;
+            justify-content: space-between;
+            svg{
+                color: #FFF;
+                margin: 0 5px;
+            }
+            svg:hover{
+                cursor: pointer;
+            }
+        }
         @media (max-width: 600px) {
-            padding: 10px;       
+            padding: 10px;     
+        }  
     }
     h2{
         color: #FFF;
@@ -97,7 +138,40 @@ export const PostSection = styled.div`
         }
     }
 
+    overflow: hidden;
+
 `;
+
+export const ModalContent = styled.div`
+    color: #FFF;
+    font-size: 20px;
+    text-align: center;
+    p{
+        margin-bottom: 15px;
+        padding: 0px 50px; 
+    }
+    div{
+        button{
+        padding: 5px 18px;
+        margin: 10px;
+        border-radius: 5px;
+        border: none;
+        &:first-child{
+            background: #FFF;
+            color: #1877F2;
+        };
+        
+        &:last-child{
+            background: #1877F2;
+            color: #FFF;
+        };
+        }
+        button:hover{
+            cursor:pointer;
+        }
+    } 
+`;
+
 
 export const Snippet = styled.div`
     word-break: break-word;
@@ -131,6 +205,11 @@ export const Snippet = styled.div`
     &:hover{
         cursor:pointer;
     }
+    .youtube {
+        display: block;
+        width: 100%;
+        padding: 10px;
+    }
 `;
 export const HeaderContainer = styled.header`
 position:fixed;
@@ -141,7 +220,7 @@ justify-content:space-between;
 align-items:center;
 background:#151515;
 padding:5px 20px;
-z-index:1;
+z-index:100;
 h1 {
     font-family: 'Passion one', sans-serif;
     font-weight:bold;
@@ -151,10 +230,22 @@ h1 {
         cursor: pointer;
     }
 }
-& > div {
+
+input {
+    width: 38vw;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    outline-style: none;
+    font-size: 16px;
+}
+
+.show-menu {
     display: flex;
     align-items: center;
+    cursor: pointer;
 }
+
 img {
     width:53px;
     height:53px;
@@ -168,7 +259,16 @@ svg {
     cursor: pointer;
     font-size: 25px;
 }
-`
+
+@media(max-width: 600px) {
+    input {
+        width: 90vw;
+        margin-left: 5%;
+        z-index: -10;
+    }
+}
+`;
+
 
 export const InputContainer = styled.article`
 background: #FFF;
@@ -176,6 +276,7 @@ display:flex;
 padding: 10px 20px;
 border-radius: 13px; 
 width: 700px;
+margin-top: 80px;
 
 @media (max-width: 600px) {
     width: 100%;
@@ -238,3 +339,64 @@ button {
     cursor: pointer;
 }
 `
+
+export const SearchContainer = styled.div`
+    position: relative;
+
+    & > svg {
+        color: #adaaaa;
+        cursor: auto;
+        position: fixed;
+        top: 19px;
+        left: 66%;
+    }
+    
+    @media(max-width: 600px) {
+        position: absolute;
+        top: 70px;
+        left: 1vw;
+        & > svg {
+            top: 76px;
+            left: 90%;
+            z-index: 100;
+        }
+    }
+`;
+
+export const UsersContainer = styled.div`
+    width: 38vw;
+    padding: 40px 0px 0px 15px;
+    border-radius: 5px;
+    font-size: 16px;
+    background-color: #E7E7E7;
+    position: absolute;
+    top: 0px;
+    left: 0;
+    z-index: -1;
+
+    a {
+        display: block;
+        margin-bottom: 20px;
+        z-index: 9;
+    }
+
+    img, p span {
+        display: inline-block;
+        padding: 10px;
+    }
+    
+    p {
+        margin-top: -38px;
+        margin-left: 55px;
+        font-weight: 300;
+    }
+    span {
+        margin-top: -48px;
+        color: #828282;
+    }
+
+    @media(max-width: 600px) {
+        width: 90vw;
+        margin-left: 5%;
+    }
+    `;
